@@ -1,0 +1,40 @@
+---
+title: 'Обновление c 7.02 до 7.03'
+author: 'Роберт'
+publishDate: '20.04.24'
+group: 'esxi'
+---
+
+# Обновление c 7.02 до 7.03
+
+---
+
+[YouTube Видео](https://www.youtube.com/watch?v=BMz49MsQnfg)
+
+Обновлено на 20.04.2024
+
+[Скачать образ VMware ESXi 7.0U3](https://www.dropbox.com/scl/fi/17kxkkzatrecxg4bunku3/VMware-ESXi-7.0U3p-23307199-depot.zip?rlkey=eioho9kysgznvr2sdl5agq3vo&st=9kfev0pp&dl=0)
+
+Авторизуемся в вебклиенте
+
+Manage > Services > TSM и TSM-SSH включаем
+
+System > Swap > Выбираем любой datastore со свободным местом
+
+Загружаем обновление через Datastore Browser
+
+Выключаем виртуальные машины
+
+Правый клик по Host > Enter maintenance mode
+
+Подключаемся через putty
+
+Вставляем команду где заменяем путь и наименование архива
+
+```bash
+esxcli software profile update -d /vmfs/volumes/LUN-03/VMware-ESXi-7.0U3-18644231-depot.zip -p ESXi-7.0U3-18644231-standard
+
+reboot
+```
+
+Правый клик по Host > Exit maintenance mode

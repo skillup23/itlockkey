@@ -1,0 +1,371 @@
+---
+title: 'Функции JavaScript'
+author: 'Роберт'
+publishDate: '20.04.24'
+group: 'frontend'
+---
+
+# Функции JavaScript
+
+---
+
+Здесь представлены интересные функции, способствующие более легкой разработке.
+
+### Функция активной ссылки при скролле
+
+Работает при прокрутке страницы и подсвечивает активную ссылку, соответствующую позиции скролла страницы.
+
+```jsx
+// Выбираем все элементы section имеющие id
+const sections = document.querySelectorAll('section[id]');
+
+function scrollActive() {
+  // фиксируем прокрутку станицы
+  const scrollY = window.pageYOffset;
+
+  sections.forEach((current) => {
+    const sectionHeight = current.offsetHeight,
+      sectionTop = current.offsetTop - 58,
+      sectionId = current.getAttribute('id');
+
+    // создаем условие, которое будет к нужному тегу "a" добавлять класс,
+    // сам тег "а" при этом должен располагаться внутри элемента "nav-menu",
+    // который включает в себя все затрагиваемые теги "а"
+    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+      document
+        .querySelector('.nav__menu a[href*=' + sectionId + ']')
+        .classList.add('active-link');
+    } else {
+      document
+        .querySelector('.nav__menu a[href*=' + sectionId + ']')
+        .classList.remove('active-link');
+    }
+  });
+}
+window.addEventListener('scroll', scrollActive);
+```
+
+Ниже пример кода html
+
+```html
+<!--это само меню к тегам "а" которому добавляются active-link (первый стоит чтобы подсветить первый элемент) -->
+<div class="nav__menu">
+  <ul class="nav__list">
+    <li class="nav__item">
+      <a href="#home" class="nav__link active-link">
+        <i class="bx bx-home-alt-2"></i>
+        <span>Home</span>
+      </a>
+    </li>
+
+    <li class="nav__item">
+      <a href="#popular" class="nav__link">
+        <i class="bx bx-building-house"></i>
+        <span>Residences</span>
+      </a>
+    </li>
+
+    <li class="nav__item">
+      <a href="#value" class="nav__link">
+        <i class="bx bx-award"></i>
+        <span>Value</span>
+      </a>
+    </li>
+
+    <li class="nav__item">
+      <a href="#contact" class="nav__link">
+        <i class="bx bx-phone"></i>
+        <span>Contact</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!--Ниже примеры section с id, по которым происходит замер высоты и изменение подсвеченного элемента -->
+<section class="home section" id="home">
+  <div class="home__container container grid">
+    <!--другой код -->
+  </div>
+</section>
+
+<!--section без id пропускаются-->
+<section class="logos section">
+  <!--другой код -->
+</section>
+
+<section class="popular section" id="popular">
+  <div class="container">
+    <!--другой код -->
+  </div>
+</section>
+
+<section class="value section" id="value">
+  <div class="value__container container grid">
+    <!--другой код -->
+  </div>
+</section>
+```
+
+---
+
+### Функция кнопки прокрутка вверх
+
+Добавляет функционал к кнопке прокрутка вверх (появляется после определенного скролла)
+
+```jsx
+// Ищем элемент по id
+function scrollUp() {
+  const scrollUp = document.getElementById('scroll-up');
+  // Когда прокрутка превышает высоту окна просмотра 350, добавляеть класс show-scroll в тег "a" с классом scroll-top.
+  if (this.scrollY >= 350) scrollUp.classList.add('show-scroll');
+  else scrollUp.classList.remove('show-scroll');
+}
+window.addEventListener('scroll', scrollUp);
+```
+
+Ниже пример кода html
+
+```html
+<!--добавляем id к элементу -->
+<a href="#" class="scrollup" id="scroll-up">
+  <i class="bx bx-chevrons-up"></i>
+</a>
+```
+
+Ниже пример кода css
+
+```css
+.scrollup {
+  position: fixed;
+  right: 1rem;
+  bottom: -30%;
+  background-color: var(--container-color);
+  box-shadow: 0 8px 12px hsla(228, 66%, 45%, 0.1);
+  display: inline-flex;
+  padding: 0.35rem;
+  border-radius: 0.25rem;
+  color: #fff;
+  font-size: 1.25rem;
+  z-index: 50;
+  transition: 0.3s;
+}
+
+.scrollup:hover {
+  transform: translateY(-0.25rem);
+  color: var(--first-color);
+}
+
+/* Show Scroll Up*/
+.show-scroll {
+  bottom: 8rem;
+}
+```
+
+---
+
+### Всплывающее окно единожды через куки с помощью JQuery
+
+Данные библиотеки реализовывают требуемый функционал
+
+Ссылка на пример кода [https://codepen.io/Black-Marketing/pen/NjzmKw](https://codepen.io/Black-Marketing/pen/NjzmKw)
+
+```jsx
+<link rel="stylesheet" type="text/css" href="jquery.fancybox.min.css" />
+	<a id="popuplink" href="#inline" style="display:none;"></a>
+	<div id="inline" style="display:none;text-align:center;">
+		<img src="images/loading_background.png" alt="" id="logo">
+		<h3 style="margin-top:20px;font-size:2rem;">Вам уже есть 18 лет?</h3>
+		<p style="font-size:1rem;">нажмите на кнопку ниже</p>
+		<p>
+			<a href="javascript:;" onclick="jQuery.fancybox.close();"
+				style="background-color:#333;padding:1rem 3rem;color:#fff;border-radius:10px;text-decoration:none;">ДА</a>
+			<a href="https://yandex.ru/"
+				style="background-color:#333;padding:1rem 3rem;color:#fff;border-radius:10px;text-decoration:none;">НЕТ</a>
+		</p>
+	</div>
+
+<script src="jquery-latest.min.js"></script>
+<script src="jquery.fancybox.min.js"></script>
+<script src="jquery.cookie.js"></script>
+
+<script>
+		jQuery(document).ready(function () {
+			function openFancybox() {
+				setTimeout(function () {
+					jQuery('#popuplink').trigger('click');
+				}, 500);
+			};
+			var visited = jQuery.cookie('visited');
+			if (visited == 'yes') {
+				// second page load, cookie active
+			} else {
+				openFancybox(); // first page load, launch fancybox
+			}
+			jQuery.cookie('visited', 'yes', {
+				expires: 1 // the number of days cookie  will be effective
+			});
+			jQuery("#popuplink").fancybox({ modal: true, maxWidth: 400, overlay: { closeClick: true } });
+		});
+	</script>
+```
+
+---
+
+### Всплывающее окно единожды через куки на чистом JS
+
+```html
+<!--==================== POPUP 18 AGE ====================-->
+<div class="popup__age">
+  <div class="popup__callback-data">
+    <h3 class="popup__callback-title">Вам уже есть 18 лет?</h3>
+    <h6 class="popup__callback-subtitle">нажмите на кнопку ниже</h6>
+    <div class="popup__callback-buttons">
+      <button class="popup__callback-button" data-confirm>ДА</button>
+      <!--важное значение имеют data-confirm и data-cancel-->
+      <a href="https://yandex.ru/" class="popup__callback-button" data-cancel
+        >НЕТ</a
+      >
+      <!--а именно разделение положительного и отрицательного ответов-->
+    </div>
+  </div>
+</div>
+```
+
+```css
+/* Age 18 popap */
+.popup__age {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  display: none;
+}
+
+.popup__age-active {
+  display: block;
+}
+
+.popup__callback-data {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #353535;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  padding: 3rem;
+  border-radius: 10px;
+  width: 700px;
+  z-index: 101;
+}
+
+.popup__callback-title {
+  font-size: 2rem;
+}
+
+.popup__callback-subtitle {
+  font-size: 1rem;
+  text-align: center;
+  width: 500px;
+}
+
+.popup__callback-buttons {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.popup__callback-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--first-color);
+  padding: 1rem 2rem;
+  color: var(--text-color-light);
+  font-size: 1.3rem;
+  padding: 1rem 2rem;
+  background-color: var(--first-color);
+  box-shadow: 0 5px 2rem 0 var(--first-color);
+  border-radius: 10px;
+}
+.popup__callback-button:hover {
+  background-color: var(--first-color-alt);
+  box-shadow: 0 6px 2.5rem 0 var(--first-color-alt);
+}
+
+.popup__callback-button i {
+  margin-right: 0.5rem;
+  font-size: 1.7rem;
+}
+
+.popup__callback-subsribe {
+  font-size: 0.8rem;
+  width: 500px;
+}
+
+.popup__callback-subsribe a {
+  color: var(--first-color);
+}
+```
+
+```jsx
+/*=============== POPUP 18 AGE ===============*/
+window.addEventListener('DOMContentLoaded', () => {
+  /*Для использования cookie необходимо создать методы getItem и setItem.
+Если мы используем localStorage или cookieStorage, то в них по умолчанию имеются данные методы и данная константа cookieStorage не нужна*/
+  const cookieStorage = {
+    getItem: (key) => {
+      const cookie = document.cookie
+        .split(';')
+        .map((cookie) => cookie.split('='))
+        .reduce((acc, [key, value]) => ({ ...acc, [key.trim()]: value }), {});
+
+      return cookie[key];
+    },
+    setItem: (key, value) => {
+      const date = new Date();
+      date.setDate(date.getDate() + 2);
+
+      document.cookie = `${key}=${value};expires=${date}`; /*expires - время жизни cookie*/
+    },
+  };
+
+  /*Можно использоватль sessionStorage - время жизни после закрытия браузера или вкладки
+  localStorage - время жизни бесконечно, только при самостоятельной очистки или дописать в коде или удалить браузер
+  cookieStorage - время жизни задается параметром expires*/
+  const storageType = cookieStorage;
+  const consentPropertyType = 'age_18';
+
+  const hasAge = () =>
+    storageType.getItem(consentPropertyType) === 'true' ? true : false;
+  const toggleStorage = (prop) =>
+    storageType.setItem(consentPropertyType, prop);
+
+  const popupAge = document.querySelector('.popup__age'),
+    btnConfirm = document.querySelector('[data-confirm]'),
+    btnCancel = document.querySelector('[data-cancel]');
+
+  if (hasAge()) {
+    // если значение hasAge true - то ничего не показываем
+  } else {
+    popupAge.classList.add('popup__age-active');
+  }
+
+  // если нажали ДА - то убираем попап и доваляем true в cookie
+  btnConfirm.addEventListener('click', () => {
+    toggleStorage(true);
+    popupAge.classList.remove('popup__age-active');
+  });
+
+  // если нажали НЕТ - то оставляем попап и доваляем false в cookie
+  btnCancel.addEventListener('click', () => {
+    toggleStorage(false);
+    popupAge.classList.add('popup__age-active');
+  });
+});
+```

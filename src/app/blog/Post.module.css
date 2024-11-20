@@ -1,0 +1,19 @@
+.post {
+  @apply w-1/2 m-auto;
+}
+
+.post h1 {
+  @apply mb-6 text-2xl;
+}
+
+.post h2 {
+  @apply mb-6 text-2xl;
+}
+
+.post p {
+  @apply mb-4 text-base;
+}
+
+.post li {
+  @apply mb-2 list-disc text-base;
+}

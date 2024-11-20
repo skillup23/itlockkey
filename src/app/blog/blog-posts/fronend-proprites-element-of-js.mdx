@@ -1,0 +1,30 @@
+---
+title: 'Свойства элементов для JavaScript'
+author: 'Роберт'
+publishDate: '20.04.24'
+group: 'frontend'
+---
+
+# Свойства элементов для js
+
+### Свойство **`Element.scrollHeight`**
+
+(только чтение) - измерение высоты контента в элементе, включая содержимое, невидимое из-за прокрутки. Значение `scrollHeight`равно минимальному `clientHeight`, которое потребуется элементу для того, чтобы поместить всё содержимое в видимую область (viewport), не используя вертикальную полосу прокрутки. Оно включает в себя padding элемента, но не его margin.
+
+Можно применить в раскрывающемся списке прибавив px в функции
+
+```jsx
+// Элемент value__accordion-content спрятан height: 0
+// но его можно открыть узнав высоту элемента через Element.scrollHeight и прибавив px
+const toggleItem = (item) => {
+  const accordionContent = item.querySelector('.value__accordion-content');
+
+  if (item.classList.contains('accordion-open')) {
+    accordionContent.removeAttribute('style');
+    item.classList.remove('accordion-open');
+  } else {
+    accordionContent.style.height = accordionContent.scrollHeight + 'px';
+    item.classList.add('accordion-open');
+  }
+};
+```

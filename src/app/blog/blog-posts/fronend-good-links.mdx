@@ -1,0 +1,181 @@
+---
+title: 'Полезные ссылки'
+author: 'Роберт'
+publishDate: '20.04.24'
+group: 'frontend'
+---
+
+# Полезные ссылки
+
+---
+
+### [https://swiperjs.com/](https://swiperjs.com/) - интеграция слайдеров на сайт
+
+Слайдеры для интеграции в js, react, vie, angular и т.д. Документацию изучить, но можно по [https://swiperjs.com/demos](https://swiperjs.com/demos) посмотреть как работает и вызвать код в песочнице. Так же задаются определенные параметры в функции, их нужно изучить:
+
+```jsx
+var swiperPopular = new Swiper('.popular__container', {
+  spaceBetween: 32,
+  grabCursor: true,
+  centeredSlides: true,
+  slidesPerView: 'auto',
+  loop: true,
+
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+```
+
+```html
+<div class="popular__container swiper">
+  <div class="swiper-wrapper">
+    <article class="popular__card swiper-slide">
+      <img src="assets/img/popular1.jpg" alt="" class="popular__img" />
+
+      <div class="popular__data">
+        <h2 class="popular__price"><span>$</span>66,356</h2>
+        <h3 class="popular__title">Garden City Assat</h3>
+        <p class="popular__description">
+          Street The Garden City Of Miraflores, Lima - Perú Av. Sol #9876
+        </p>
+      </div>
+    </article>
+
+    <article class="popular__card swiper-slide">
+      <img src="assets/img/popular2.jpg" alt="" class="popular__img" />
+
+      <div class="popular__data">
+        <h2 class="popular__price"><span>$</span>35,159</h2>
+        <h3 class="popular__title">Gables Luxurious House</h3>
+        <p class="popular__description">
+          Street The Garden City Of Miraflores, Lima - Perú Av. Sol #9876
+        </p>
+      </div>
+    </article>
+
+    <article class="popular__card swiper-slide">
+      <img src="assets/img/popular3.jpg" alt="" class="popular__img" />
+
+      <div class="popular__data">
+        <h2 class="popular__price"><span>$</span>75,043</h2>
+        <h3 class="popular__title">Garden Orchard City</h3>
+        <p class="popular__description">
+          Street The Garden City Of Miraflores, Lima - Perú Av. Sol #9876
+        </p>
+      </div>
+    </article>
+
+    <article class="popular__card swiper-slide">
+      <img src="assets/img/popular4.jpg" alt="" class="popular__img" />
+
+      <div class="popular__data">
+        <h2 class="popular__price"><span>$</span>62,024</h2>
+        <h3 class="popular__title">Luxurious City Garden</h3>
+        <p class="popular__description">
+          Street The Garden City Of Miraflores, Lima - Perú Av. Sol #9876
+        </p>
+      </div>
+    </article>
+
+    <article class="popular__card swiper-slide">
+      <img src="assets/img/popular5.jpg" alt="" class="popular__img" />
+
+      <div class="popular__data">
+        <h2 class="popular__price"><span>$</span>47,043</h2>
+        <h3 class="popular__title">Aliva Private Garden</h3>
+        <p class="popular__description">
+          Street The Garden City Of Miraflores, Lima - Perú Av. Sol #9876
+        </p>
+      </div>
+    </article>
+  </div>
+
+  <div class="swiper-button-next">
+    <i class="bx bx-chevron-right"></i>
+  </div>
+  <div class="swiper-button-prev">
+    <i class="bx bx-chevron-left"></i>
+  </div>
+</div>
+```
+
+---
+
+### [https://boxicons.com/](https://boxicons.com/) - иконки на сайт
+
+[https://boxicons.com/usage](https://boxicons.com/usage) - инструкция по подключению
+
+можно вставлять как веб-компонент
+
+```html
+<box-icon name="color"></box-icon>
+```
+
+так и в шрифт
+
+```html
+<i class="bx bx-color"></i>
+```
+
+Пример:
+
+```html
+<a href="#contact" class="nav__link">
+  <i class="bx bx-phone"></i>
+  <span>Contact</span>
+</a>
+```
+
+---
+
+### [https://scrollrevealjs.org/](https://scrollrevealjs.org/) - анимация элементов при скролле страницы
+
+интегрируем код с гитхаб скачав [scrollreveal.min.js](https://github.com/jlmakes/scrollreveal/blob/master/dist/scrollreveal.min.js)
+
+```jsx
+<script src="assets/js/scrollreveal.min.js"></script>
+```
+
+подключаем функцию в основном js файле, где указываем стандартные параметры появления, дистанции, задержки. (reset:true - позволяет проигрывать анимацию каждый раз)
+
+```jsx
+const sr = ScrollReveal({
+  origin: 'top',
+  distance: '60px',
+  duration: 2500,
+  delay: 400,
+  reset: true,
+});
+```
+
+Далее добавляем классы элементов на странице и задаем им разные параметры если требуется
+
+```jsx
+sr.reveal(
+  `.home__title, .popular__container, .subscribe__container, .footer__container`
+);
+sr.reveal(`.home__description, .footer__info`, { delay: 500 });
+sr.reveal(`.home__search`, { delay: 600 });
+sr.reveal(`.home__value`, { delay: 700 });
+sr.reveal(`.home__images`, { delay: 800, origin: 'bottom' });
+sr.reveal(`.logos__img`, { interval: 100 });
+sr.reveal(`.value__images, .contact__content`, { origin: 'left' });
+sr.reveal(`.value__content, .contact__images`, { origin: 'right' });
+```
+
+---
+
+**Cyberpunk 2077 Buttons** — кнопки _Cyberpunk 2077_ на чистом _CSS_. _Glitch_ — эффекты автор реализовал с помощью _CSS_ свойства _clip-path._
+[https://codepen.io/jh3y/pen/PoGbxLp](https://codepen.io/jh3y/pen/PoGbxLp)
+[Codepen Amazing](https://t.me/codepen_amazing)
+
+---
+
+**TOASTS** — пример реализации всплывающих уведомлений: информационное, предупреждающее уведомления и уведомление об успехе. Реализовано с помощью _CSS_ и _JavaScript_.
+[https://codepen.io/mrtrimble/pen/mdEgzzR](https://codepen.io/mrtrimble/pen/mdEgzzR)
+
+---
+
+[Menu Animation — анимация кнопки меню, реализованная с помощью CSS и JavaScript.](%D0%9F%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5%20%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B8%2031f28976ebba4ba39a60fed63d12f72f/Menu%20Animation%20%E2%80%94%20%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D1%86%D0%B8%D1%8F%20%D0%BA%D0%BD%D0%BE%D0%BF%D0%BA%D0%B8%20%D0%BC%D0%B5%D0%BD%D1%8E,%20%D1%80%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%204134145647fe4623ad3a0b0182786709.md)
