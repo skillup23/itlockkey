@@ -6,9 +6,10 @@ export const PUBLIC_ROUTES = [
   '/login',
   // '/register',
   '/products',
-  '/api/register',
-  '/api/auth/callback/google',
-  '/api/auth/callback/github',
+  // '/api/register',
+  // '/api/auth/callback/google',
+  // '/api/auth/callback/github',
+  '/api/test-info',
 ];
 
 export const PROTECTED_SUB_ROUTES = ['/checkout'];
