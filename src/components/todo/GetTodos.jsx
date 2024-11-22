@@ -1,6 +1,6 @@
-import { deleteTodo } from '@/lib/action';
-import Todo from '@/model/todoModel';
-import React from 'react';
+import { deleteTodo } from "@/lib/actionTodo";
+import Todo from "@/model/todoModel";
+import React from "react";
 
 export default async function GetTodos() {
   try {
