@@ -30,17 +30,44 @@ export const createTodos = async (formData) => {
   }
 };
 
+// Удаление задачи с указанным идентификатором
 export const deleteTodo = async (id) => {
-  // Извлечение идентификатора задачи из FormData
+  // Извлечение идентификатора задачи
   const todoId = id.get('id');
   try {
-    // Удаление задачи с указанным идентификатором
     await Todo.deleteOne({ _id: todoId });
     // Запуск повторной проверки указанного пути ("/todo")
     revalidatePath('/todo');
-    // Возвращаем сообщение об успешном выполнении ('задача удалена');
     return 'задача удалена';
   } catch (error) {
     return { message: 'ошибка удаления задачи' };
+  }
+};
+
+// Обновление задачи с указанным идентификатором
+export const updateTodos = async (id, FormData, keyObj) => {
+  const update = FormData.get(keyObj);
+
+  try {
+    if (keyObj === 'title') {
+      await Todo.updateOne(
+        { _id: id },
+        {
+          title: update,
+        }
+      );
+    } else if (keyObj === 'description') {
+      await Todo.updateOne(
+        { _id: id },
+        {
+          description: update,
+        }
+      );
+    }
+
+    revalidatePath('/todo/[id]', 'page');
+    return 'Задача обновлена';
+  } catch (error) {
+    return { message: 'ошибка обновления данных' };
   }
 };

@@ -1,0 +1,19 @@
+---
+title: 'Ошибка при восстановлении дисков в Hiper-v'
+author: 'Роберт'
+publishDate: '29.11.24'
+group: 'windows'
+---
+
+# Ошибка при восстановлении дисков в Hiper-v
+
+Ошибка при восстановлении дисков в Hiper-v
+
+Инструкция
+[https://learn.microsoft.com/ru-ru/troubleshoot/windows-server/virtualization/hyper-v-virtual-machine-not-start-0x80070005](https://learn.microsoft.com/ru-ru/troubleshoot/windows-server/virtualization/hyper-v-virtual-machine-not-start-0x80070005)
+
+Пример команды
+
+```bash
+icacls "F:\Hyper-V\Virtual Hard Disks\SRV-APP-ENERGOA03.vhdx" /grant "NT VIRTUAL MACHINE\C87A1FB1-7509-475C-BE16-4E92391051FC":(F)
+```

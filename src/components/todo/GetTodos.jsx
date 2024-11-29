@@ -1,6 +1,7 @@
-import { deleteTodo } from "@/lib/actionTodo";
-import Todo from "@/model/todoModel";
-import React from "react";
+import { deleteTodo } from '@/lib/actionTodo';
+import Todo from '@/model/todoModel';
+import Link from 'next/link';
+import React from 'react';
 
 export default async function GetTodos() {
   try {
@@ -41,6 +42,7 @@ export default async function GetTodos() {
                 <h3>{todo.company}</h3>
                 <p>{deadLineToDate(todo.todoDeadline)}</p>
               </div>
+              <Link href={`/todos/${todo._id}`}>Подробнее</Link>
               <form action={deleteTodo}>
                 <input
                   hidden
