@@ -34,10 +34,7 @@ const HomePage = async () => {
         </h2>
       )}
       {session?.user.role === 'admin' ? (
-        <Link
-          href="/dashboard"
-          className="my-4 p-2  bg-green-500 text-white rounded"
-        >
+        <Link href="/dashboard" className="my-4 p-4 rounded outset bg-green">
           Управление приложением
         </Link>
       ) : (

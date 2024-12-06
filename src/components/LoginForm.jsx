@@ -4,6 +4,7 @@
 import { doCredentialLogin } from '@/app/actions';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import SubmitButton from './todo/SubmitButton';
 
 const LoginForm = () => {
   //Начало ошибки гидратации https://nextjs.org/docs/messages/react-hydration-error
@@ -45,35 +46,41 @@ const LoginForm = () => {
         <div>
           <p className="text-xl text-red-500">{error}</p>
           <form
-            className="my-5 flex flex-col items-center border p-3 border-gray-200 rounded-md"
+            className="my-5 flex flex-col items-start p-5 outset rounded-2xl"
             onSubmit={handleFormSubmit}
           >
-            <div className="my-2">
+            <div className="my-2 w-full">
               <label htmlFor="email">Email</label>
               <input
-                className="border mx-2 border-gray-500 rounded"
+                className="rounded inset-input"
                 type="email"
                 name="email"
                 id="email"
               />
             </div>
 
-            <div className="my-2">
+            <div className="my-2 w-full">
               <label htmlFor="password">Пароль</label>
               <input
-                className="border mx-2 border-gray-500 rounded"
+                className="rounded inset-input"
                 type="password"
                 name="password"
                 id="password"
               />
             </div>
 
-            <button
+            {/* <button
               type="submit"
               className="bg-orange-300 mt-4 rounded flex justify-center items-center w-36"
             >
               Войти
-            </button>
+            </button> */}
+
+            <SubmitButton
+              cssStyle="bg-blue text-white"
+              text="Войти"
+              textLoad="Входим..."
+            />
           </form>
           {/* <SocialLogin /> */}
         </div>

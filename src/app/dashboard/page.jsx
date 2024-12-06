@@ -1,4 +1,5 @@
 import { auth } from '@/auth';
+import Logout from '@/components/Logout';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
@@ -17,16 +18,17 @@ const DashboardPage = async () => {
 
         <Link
           href="/register"
-          className="my-4 p-2 bg-green-500 text-white rounded"
+          className="my-4 p-4 bg-green-500 rounded outset bg-green"
         >
           Добавить нового пользователя
         </Link>
         <Link
           href="/users-edit"
-          className="my-4 p-2 bg-green-500 text-white rounded"
+          className="my-4 p-4 bg-green-500 rounded outset bg-green"
         >
           Редактировать пользователей
         </Link>
+        <Logout />
       </div>
     );
   }

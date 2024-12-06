@@ -1,10 +1,24 @@
 import React from 'react';
 import { useFormStatus } from 'react-dom';
 
-export default function SubmitButton() {
+export default function SubmitButton({ cssStyle, text, textLoad }) {
   const { pending } = useFormStatus();
+
   return (
     <button
+      type="submit"
+      {...(pending && { disabled: true })}
+      className={`mt-10 w-80 mx-auto outset ${
+        pending ? 'cursor-not-allowed' : 'cursor-pointer'
+      } ${cssStyle}`}
+    >
+      {pending ? textLoad : text}
+    </button>
+  );
+}
+
+{
+  /* <button
       type="submit"
       {...(pending && { disabled: true })}
       className={`bg-blue-400 h-10 w-62 p-2 mt-10 rounded text-white font-bold ${
@@ -12,6 +26,5 @@ export default function SubmitButton() {
       }`}
     >
       {pending ? 'Добавление...' : 'Добавить задачу'}
-    </button>
-  );
+    </button> */
 }

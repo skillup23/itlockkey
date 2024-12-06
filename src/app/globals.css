@@ -2,3 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #e0e8fd;
+}
+
+input,
+textarea,
+button {
+  outline: none;
+  border-style: none;
+  border-radius: 15px;
+  background-color: #eee;
+  padding: 10px 15px;
+  width: 100%;
+}
+
+/* Элемент будет вдавленным */
+.inset {
+  box-shadow: inset -5px -5px 5px #fff, inset 4px 2px 10px #bfc0c5;
+}
+
+/* Элемент будет выпуклым */
+.outset {
+  box-shadow: 10px 10px 15px #bfc0c5, -5px -5px 12px #fff;
+}
+.outset:hover {
+  box-shadow: 5px 5px 5px #bfc0c5, -5px -5px 5px #fff;
+}
+.outset:active {
+  color: black;
+  background: #eff3ff;
+  box-shadow: inset 5px 5px 8px #cbcfd9, inset -5px -5px 8px #ffffff;
+}
+
+.outset-main {
+  box-shadow: 5px 5px 8px #cbcfd9, -5px -5px 8px #ffffff;
+}
+
+.outset-header {
+  box-shadow: 5px 5px 12px #000000;
+}
+
+.inset-input {
+  background: #eff3ff;
+  box-shadow: inset 5px 5px 8px #cbcfd9, inset -5px -5px 8px #ffffff;
+}
+
+.outset-nav {
+  background: #2f3545;
+  box-shadow: 5px 5px 8px #282d3b, -5px -5px 8px #363d4f;
+}
+.outset-nav:hover {
+  background: linear-gradient(145deg, #2b303f, #242935);
+  box-shadow: 5px 5px 8px #222632, -5px -5px 8px #2e3444;
+}
+.outset-nav:active {
+  background: #282d3b;
+  box-shadow: inset 5px 5px 8px #222632, inset -5px -5px 8px #2e3444;
+}
+
+button:hover {
+  box-shadow: 5px 5px 5px #bfc0c5, -5px -5px 5px #fff;
+}
+button:active {
+  color: black;
+  background: #eff3ff;
+  box-shadow: inset 5px 5px 8px #cbcfd9, inset -5px -5px 8px #ffffff;
+}

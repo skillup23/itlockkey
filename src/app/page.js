@@ -5,9 +5,6 @@ export default function Landing() {
     <>
       <div className="text-center text-2xl">Главная страница</div>
       <div className="flex flex-col justify-center items-center p-8 gap-4">
-        <Link className="text-3xl underline" href="/products">
-          Все продукты
-        </Link>
         <Link className="text-3xl underline" href="/blog">
           FAQ
         </Link>
