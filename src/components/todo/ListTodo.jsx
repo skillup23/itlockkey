@@ -1,33 +1,22 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { updateTodos } from '@/lib/actionTodo';
+import { updateTodos } from "@/lib/actionTodo";
+import { FilePenLine, Save } from "lucide-react";
+import { useState } from "react";
 
-// import { useRef } from "react";
-// import SubmitButton from "./SubmitButton";
-// import Todo from '@/model/todoModel';
-
-export default function ListTodo({ todo, keyObj, info }) {
-  //   const ref = useRef(null);
+export default function ListTodo({ todo, keyObj, info, inputTipe }) {
   const [activeEdit, setActiveEdit] = useState(true);
-  //   const [titleSave, setTitleSave] = useState(todo.title);
-  //   const [descriptionSave, setDescriptionSave] = useState(todo.description);
-
-  //   const data = JSON.parse(JSON.stringify(todo));
-
-  //   const id = data._id;
 
   return (
     <>
       {activeEdit ? (
-        <div className="flex gap-8 border-2">
-          <h2 className="p-2 w-72">{info}</h2>
-          <button
+        <div className="relative outset rounded">
+          <p className="w-full p-2">{info}</p>
+          <FilePenLine
+            size={24}
             onClick={() => setActiveEdit(!activeEdit)}
-            className="p-2 bg-slate-300"
-          >
-            Изменить
-          </button>
+            className="absolute right-2 top-2 cursor-pointer text-blue"
+          />
         </div>
       ) : (
         <form
@@ -35,18 +24,34 @@ export default function ListTodo({ todo, keyObj, info }) {
             await updateTodos(todo._id, FormData, keyObj);
             setActiveEdit(!activeEdit);
           }}
-          className="flex gap-8 border-2"
+          className="relative w-full flex text-base"
         >
-          <input
-            type="text"
-            name={keyObj}
-            className="w-72 p-2"
-            required
-            defaultValue={info}
-          />
+          {inputTipe == "date" && (
+            <input
+              type="date"
+              name={keyObj}
+              className="mb-2 w-full py-2 px-3 inset"
+              required
+              defaultValue={info}
+            />
+          )}
+          {!inputTipe && (
+            <textarea
+              type="text"
+              name={keyObj}
+              className="w-full p-2 inset"
+              defaultValue={info}
+              required
+              rows="3"
+              cols="20"
+            />
+          )}
 
-          <button type="submit" className="p-2 bg-slate-600">
-            Сохранить
+          <button
+            type="submit"
+            className="absolute w-6 right-2 top-2 p-0 text-orange"
+          >
+            <Save size={24} />
           </button>
         </form>
       )}

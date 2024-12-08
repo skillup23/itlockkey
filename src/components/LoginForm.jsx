@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 // import SocialLogin from './SocialLogin';
-import { doCredentialLogin } from '@/app/actions';
-import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import SubmitButton from './todo/SubmitButton';
+import { doCredentialLogin } from "@/app/actions";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import SubmitButton from "./SubmitButton";
 
 const LoginForm = () => {
   //Начало ошибки гидратации https://nextjs.org/docs/messages/react-hydration-error
@@ -15,7 +15,7 @@ const LoginForm = () => {
   }, []);
   //Конец ошибки гидратации
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const router = useRouter();
 
   async function handleFormSubmit(event) {
@@ -32,11 +32,11 @@ const LoginForm = () => {
         setError(response.error.message);
         //если нет ошибок, то перенаправляем на домашнюю страницу
       } else {
-        router.push('/home');
+        router.push("/home");
       }
     } catch (e) {
       console.error(e);
-      setError('Проверьте имя пользователя или пароль');
+      setError("Проверьте имя пользователя или пароль");
     }
   }
 
@@ -85,7 +85,7 @@ const LoginForm = () => {
           {/* <SocialLogin /> */}
         </div>
       ) : (
-        ''
+        ""
       )}
     </>
   );

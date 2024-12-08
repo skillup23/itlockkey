@@ -1,15 +1,18 @@
-import Forms from '@/components/todo/Forms';
-import GetTodos from '@/components/todo/GetTodos';
+import AddTodoForm from "@/components/todo/AddTodoForms";
+import AllTodos from "@/components/todo/AllTodos";
 
-export default function Home() {
+export default function Todos() {
   return (
     <div className="min-h-screen relative">
-      <div className="flex justify-around flex-col items-center h-1/2 ">
-        <h1 className=" text-4xl font-bold mt-12 mb-12">Задачи</h1>
-        <Forms />
-      </div>
-      <div className="flex  flex-col items-center h-1/2 ">
-        <GetTodos />
+      <h2 className="mt-2 mb-6 text-2xl font-bold text-center">Задачи</h2>
+      <div className="flex items-start gap-8">
+        <div className="flex justify-around flex-col items-center">
+          <AddTodoForm />
+        </div>
+
+        <div className="p-4 flex flex-col items-center outset rounded-xl">
+          <AllTodos />
+        </div>
       </div>
     </div>
   );

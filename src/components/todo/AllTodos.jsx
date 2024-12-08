@@ -1,9 +1,9 @@
-import { deleteTodo } from '@/lib/actionTodo';
-import Todo from '@/model/todoModel';
-import Link from 'next/link';
-import React from 'react';
+import { deleteTodo } from "@/lib/actionTodo";
+import Todo from "@/model/todoModel";
+import Link from "next/link";
+import React from "react";
 
-export default async function GetTodos() {
+export default async function AllTodos() {
   try {
     const todos = await Todo.find();
     if (todos.length === 0) {

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { createTodos } from '@/lib/actionTodo';
-import { useRef } from 'react';
-import SubmitButton from './SubmitButton';
+import { createTodos } from "@/lib/actionTodo";
+import { useRef } from "react";
+import SubmitButton from "../SubmitButton";
 
-export default function Forms() {
+export default function AddTodoForm() {
   const ref = useRef(null);
 
   return (
@@ -14,9 +14,9 @@ export default function Forms() {
         ref.current?.reset();
         await createTodos(FormData);
       }}
-      className="p-5 flex flex-col outset rounded-2xl"
+      className="w-96 ml-4 p-4 flex flex-col outset rounded-xl text-sm"
     >
-      <h2 className="mb-4 text-center text-xl font-bold">
+      <h2 className="mb-1 text-center text-base font-bold">
         Добавить новую задачу
       </h2>
 
@@ -26,7 +26,7 @@ export default function Forms() {
       <input
         type="text"
         name="title"
-        className="mb-2 w-96 py-2 px-3 inset"
+        className="mb-2 w-full py-2 px-3 inset"
         required
       />
 
@@ -36,9 +36,9 @@ export default function Forms() {
       <textarea
         type="text"
         name="description"
-        className="mb-2 w-96 py-2 px-3 inset"
+        className="mb-2 w-full py-2 px-3 inset"
         required
-        rows="5"
+        rows="3"
         cols="20"
       />
       {/* <input
@@ -54,7 +54,7 @@ export default function Forms() {
       <input
         type="text"
         name="company"
-        className="mb-2 w-96 py-2 px-3 inset"
+        className="mb-2 w-full py-2 px-3 inset"
         required
       />
 
@@ -64,12 +64,12 @@ export default function Forms() {
       <input
         type="date"
         name="todoDeadline"
-        className="w-96 py-2 px-3 inset"
+        className="w-full py-2 px-3 inset"
         required
       />
 
       <SubmitButton
-        cssStyle="hover:text-green-500"
+        cssStyle="bg-blue text-white"
         text="Добавить задачу"
         textLoad="Добавление..."
       />

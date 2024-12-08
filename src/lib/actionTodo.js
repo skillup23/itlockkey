@@ -1,15 +1,15 @@
-'use server';
-import Todo from '@/model/todoModel';
-import { revalidatePath } from 'next/cache';
-import { dbConnect } from '@/lib/mongo';
+"use server";
+import { dbConnect } from "@/lib/mongo";
+import Todo from "@/model/todoModel";
+import { revalidatePath } from "next/cache";
 
 export const createTodos = async (formData) => {
   await dbConnect();
   // Извлечение содержимого и времени выполнения задачи из formData
-  const title = formData.get('title');
-  const description = formData.get('description');
-  const company = formData.get('company');
-  const todoDeadline = formData.get('todoDeadline');
+  const title = formData.get("title");
+  const description = formData.get("description");
+  const company = formData.get("company");
+  const todoDeadline = formData.get("todoDeadline");
   try {
     // Создание новой задачи с помощью модели Todo
     const newTodo = await Todo.create({
@@ -21,26 +21,26 @@ export const createTodos = async (formData) => {
     // Сохранение нового элемента в списке дел
     newTodo.save();
     // Запуск повторной проверки указанного пути ("/todo")
-    revalidatePath('/todo');
+    revalidatePath("/todo");
     // Возврат строкового представления нового элемента в списке дел
     return newTodo.toString();
   } catch (error) {
     console.log(error);
-    return { message: 'ошибка создания задачи' };
+    return { message: "ошибка создания задачи" };
   }
 };
 
 // Удаление задачи с указанным идентификатором
 export const deleteTodo = async (id) => {
   // Извлечение идентификатора задачи
-  const todoId = id.get('id');
+  const todoId = id.get("id");
   try {
     await Todo.deleteOne({ _id: todoId });
     // Запуск повторной проверки указанного пути ("/todo")
-    revalidatePath('/todo');
-    return 'задача удалена';
+    revalidatePath("/todo");
+    return "задача удалена";
   } catch (error) {
-    return { message: 'ошибка удаления задачи' };
+    return { message: "ошибка удаления задачи" };
   }
 };
 
@@ -49,25 +49,39 @@ export const updateTodos = async (id, FormData, keyObj) => {
   const update = FormData.get(keyObj);
 
   try {
-    if (keyObj === 'title') {
+    if (keyObj === "title") {
       await Todo.updateOne(
         { _id: id },
         {
           title: update,
         }
       );
-    } else if (keyObj === 'description') {
+    } else if (keyObj === "description") {
       await Todo.updateOne(
         { _id: id },
         {
           description: update,
         }
       );
+    } else if (keyObj === "company") {
+      await Todo.updateOne(
+        { _id: id },
+        {
+          company: update,
+        }
+      );
+    } else if (keyObj === "todoDeadline") {
+      await Todo.updateOne(
+        { _id: id },
+        {
+          todoDeadline: update,
+        }
+      );
     }
 
-    revalidatePath('/todo/[id]', 'page');
-    return 'Задача обновлена';
+    revalidatePath("/todo/[id]", "page");
+    return "Задача обновлена";
   } catch (error) {
-    return { message: 'ошибка обновления данных' };
+    return { message: "ошибка обновления данных" };
   }
 };
