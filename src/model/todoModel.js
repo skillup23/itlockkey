@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const todoSchema = new mongoose.Schema(
   {
@@ -18,6 +18,10 @@ const todoSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
+    status: {
+      type: String,
+      required: true,
+    },
   },
   {
     // Автоматическое присвоение времени создания и времени изменения
@@ -25,6 +29,6 @@ const todoSchema = new mongoose.Schema(
   }
 );
 
-const Todo = mongoose.models?.Todo || mongoose.model('Todo', todoSchema);
+const Todo = mongoose.models?.Todo || mongoose.model("Todo", todoSchema);
 
 export default Todo;

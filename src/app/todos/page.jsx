@@ -10,7 +10,7 @@ export default function Todos() {
           <AddTodoForm />
         </div>
 
-        <div className="p-4 flex flex-col items-center outset rounded-xl">
+        <div className="w-full flex flex-col items-center">
           <AllTodos />
         </div>
       </div>

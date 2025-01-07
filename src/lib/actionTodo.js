@@ -10,6 +10,7 @@ export const createTodos = async (formData) => {
   const description = formData.get("description");
   const company = formData.get("company");
   const todoDeadline = formData.get("todoDeadline");
+  const status = "Открыта";
   try {
     // Создание новой задачи с помощью модели Todo
     const newTodo = await Todo.create({
@@ -17,6 +18,7 @@ export const createTodos = async (formData) => {
       description,
       company,
       todoDeadline,
+      status,
     });
     // Сохранение нового элемента в списке дел
     newTodo.save();
@@ -75,6 +77,13 @@ export const updateTodos = async (id, FormData, keyObj) => {
         { _id: id },
         {
           todoDeadline: update,
+        }
+      );
+    } else if (keyObj === "status") {
+      await Todo.updateOne(
+        { _id: id },
+        {
+          status: update,
         }
       );
     }

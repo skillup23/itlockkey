@@ -23,16 +23,38 @@ export default async function TodoDetailsPage({ params: { id } }) {
     return `${month}.${day}.${year}`;
   };
 
+  // const dateCrArr = new Date(data.createdAt);
+  // const dateCreate = `${dateCrArr.getHours()}:${dateCrArr.getMinutes()} ${dateCrArr.getDate()}.${dateCrArr.getMonth()}.${dateCrArr.getFullYear()}`;
+
+  // const dateUpArr = new Date(data.updatedAt);
+  // const dateUpdate = `${dateUpArr.getHours()}:${dateUpArr.getMinutes()} ${dateUpArr.getDate()}.${
+  //   dateUpArr.getMonth() + 1
+  // }.${dateUpArr.getFullYear()}`;
+
+  const currentDateCrt = new Date(data.createdAt);
+  const currentDateUpd = new Date(data.updatedAt);
+  const options = {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+  };
+  const dateCreate = currentDateCrt.toLocaleDateString("ru-RU", options);
+  const dateUpdate = currentDateUpd.toLocaleDateString("ru-RU", options);
+
   return (
     <div className="px-6 py-4 flex flex-col justify-center items-center">
       <ul className="w-full flex justify-between text-xs">
         <li>
           <h6 className="text-gray-light">ID заявки</h6>
-          <p>{todo._id}</p>
+          <p>{data._id}</p>
         </li>
         <li>
           <h6 className="text-gray-light">Дата создания</h6>
-          <p>09.12.24</p>
+          <p>{dateCreate}</p>
+        </li>
+        <li>
+          <h6 className="text-gray-light">Дата обновления</h6>
+          <p>{dateUpdate}</p>
         </li>
         <li>
           <h6 className="text-gray-light">Постановщик</h6>
@@ -52,43 +74,50 @@ export default async function TodoDetailsPage({ params: { id } }) {
         <ul className="w-2/3">
           <li>
             <h6 className="p-1 text-gray-light">Название</h6>
-            <ListTodo todo={data} keyObj="title" info={todo.title} />
+            <ListTodo todo={data} keyObj="title" info={data.title} />
           </li>
           <li className="mt-6">
             <h6 className="p-1 text-gray-light">Описание</h6>
             <ListTodo
               todo={data}
               keyObj="description"
-              info={todo.description}
+              info={data.description}
             />
           </li>
           <li className="mt-6">
             <h6 className="p-1 text-gray-light">Комментарии</h6>
-            {commentsTest.map((comm, index) => (
-              <p className="w-full mb-2 p-2 inset rounded" key={index}>
-                {comm}
-              </p>
-            ))}
+            <div className="w-full mb-2 p-4 inset rounded">
+              {commentsTest.map((comm, index) => (
+                <p className="mb-4 p-2 bg-blue-light rounded" key={index}>
+                  {comm}
+                </p>
+              ))}
+            </div>
           </li>
         </ul>
 
         <ul className="w-1/3">
           <li>
             <h2 className="p-1 text-gray-light">Организация</h2>
-            <ListTodo todo={data} keyObj="company" info={todo.company} />
+            <ListTodo todo={data} keyObj="company" info={data.company} />
           </li>
           <li className="mt-6">
-            <h2 className="p-1 text-gray-light">Дедлайн</h2>
+            <h6 className="p-1 text-gray-light">Дедлайн</h6>
             <ListTodo
               todo={data}
               keyObj="todoDeadline"
-              info={deadLineToDate(todo.todoDeadline)}
+              info={deadLineToDate(data.todoDeadline)}
               inputTipe="date"
             />
           </li>
           <li className="mt-6">
             <h6 className="text-[#69696a]">Статус</h6>
-            <p>В работе</p>
+            <ListTodo
+              todo={data}
+              keyObj="status"
+              info={data.status}
+              inputTipe="select"
+            />
           </li>
         </ul>
       </div>

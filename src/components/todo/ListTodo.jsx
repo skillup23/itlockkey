@@ -11,7 +11,7 @@ export default function ListTodo({ todo, keyObj, info, inputTipe }) {
     <>
       {activeEdit ? (
         <div className="relative outset rounded">
-          <p className="w-full p-2">{info}</p>
+          <p className="w-full p-2 whitespace-pre-line">{info}</p>
           <FilePenLine
             size={24}
             onClick={() => setActiveEdit(!activeEdit)}
@@ -34,6 +34,18 @@ export default function ListTodo({ todo, keyObj, info, inputTipe }) {
               required
               defaultValue={info}
             />
+          )}
+          {inputTipe == "select" && (
+            <select
+              name={keyObj}
+              defaultValue={info}
+              className="w-full p-2 inset"
+            >
+              <option value="Открыта">Открыта</option>
+              <option value="В работе">В работе</option>
+              <option value="Ожидание">Ожидание</option>
+              <option value="Закрыта">Закрыта</option>
+            </select>
           )}
           {!inputTipe && (
             <textarea

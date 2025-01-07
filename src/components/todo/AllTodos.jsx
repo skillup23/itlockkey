@@ -27,33 +27,41 @@ export default async function AllTodos() {
 
       // Creating a new Date object from the given string
       return (
-        <div className="w-72 mt-8">
+        <div className="w-full">
           <h2 className="text-center text-green-400 font-bold mb-4">
             Текущие задачи
           </h2>
-          {todos.map((todo) => (
+          {todos.reverse().map((todo) => (
             <div
               key={todo._id}
-              className="flex flex-col items-center gap-2 p-2 border-blue-400 border-2 rounded my-4"
+              className="w-full p-4 flex gap-2 my-4 outset rounded-xl"
             >
-              <div className="flex flex-col gap-2 justify-center items-center ">
+              <div className="w-full flex gap-4 items-center ">
                 <h3>{todo.title}</h3>
-                <h3>{todo.description}</h3>
-                <h3>{todo.company}</h3>
-                <p>{deadLineToDate(todo.todoDeadline)}</p>
+                {/* <h3 className="text-balance">{todo.description}</h3> */}
+                <div className="ml-auto mr-6 flex flex-col justify-between">
+                  <h3>{todo.company}</h3>
+                  <p>{deadLineToDate(todo.todoDeadline)}</p>
+                </div>
               </div>
-              <Link href={`/todos/${todo._id}`}>Подробнее</Link>
-              <form action={deleteTodo}>
-                <input
-                  hidden
-                  type="text"
-                  name="id"
-                  defaultValue={todo._id.toString()}
-                />
-                <button className="border rounded px-2 bg-red-400">
-                  Удалить
-                </button>
-              </form>
+              <div className="flex gap-4">
+                <Link href={`/todos/${todo._id}`}>
+                  <button className="border rounded px-2 bg-red-400">
+                    Подробнее
+                  </button>
+                </Link>
+                <form action={deleteTodo}>
+                  <input
+                    hidden
+                    type="text"
+                    name="id"
+                    defaultValue={todo._id.toString()}
+                  />
+                  <button className="border rounded px-2 bg-red-400">
+                    Удалить
+                  </button>
+                </form>
+              </div>
             </div>
           ))}
         </div>
