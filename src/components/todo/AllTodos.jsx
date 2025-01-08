@@ -17,16 +17,14 @@ export default async function AllTodos() {
       const deadLineToDate = (todoDeadline) => {
         const deadlineDate = new Date(todoDeadline);
 
-        // Extracting day, month, and year components from the Date object
-        const day = deadlineDate.getDate();
-        const month = deadlineDate.getMonth() + 1; // Months are zero-based, so add 1
-        const year = deadlineDate.getFullYear();
+        return deadlineDate.toLocaleDateString("ru-RU");
+        // const day = deadlineDate.getDate();
+        // const month = deadlineDate.getMonth() + 1; // Months are zero-based, so add 1
+        // const year = deadlineDate.getFullYear();
 
-        // Formatting the date as MM/DD/YYYY
-        return `${day}/${month}/${year}`;
+        // return `${day}/${month}/${year}`;
       };
 
-      // Creating a new Date object from the given string
       return (
         <div className="mt-12">
           <div className="absolute top-0 left-[332px]">

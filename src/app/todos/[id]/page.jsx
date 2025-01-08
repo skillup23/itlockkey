@@ -11,20 +11,21 @@ export default async function TodoDetailsPage({ params: { id } }) {
     "Длинный комментарий с большим колличеством текста, написанный, чтобы все это посмотреть, как это все получается и удается",
   ];
 
-  const deadLineToDate = (todoDeadline) => {
-    const deadlineDate = new Date(todoDeadline);
+  // const deadLineToDate = (todoDeadline) => {
+  //   const deadlineDate = new Date(todoDeadline);
 
-    // Extracting day, month, and year components from the Date object
-    const day = deadlineDate.getDate();
-    const month = deadlineDate.getMonth() + 1; // Months are zero-based, so add 1
-    const year = deadlineDate.getFullYear();
+  //   // Extracting day, month, and year components from the Date object
+  //   const day = deadlineDate.getDate();
+  //   const month = deadlineDate.getMonth() + 1; // Months are zero-based, so add 1
+  //   const year = deadlineDate.getFullYear();
 
-    // Formatting the date as MM/DD/YYYY
-    return `${day}.${month}.${year}`;
-  };
+  //   // Formatting the date as MM/DD/YYYY
+  //   return `${day}.${month}.${year}`;
+  // };
 
   const currentDateCrt = new Date(data.createdAt);
   const currentDateUpd = new Date(data.updatedAt);
+  const currentDeadline = new Date(data.todoDeadline);
   const options = {
     hour: "numeric",
     minute: "numeric",
@@ -32,6 +33,7 @@ export default async function TodoDetailsPage({ params: { id } }) {
   };
   const dateCreate = currentDateCrt.toLocaleDateString("ru-RU", options);
   const dateUpdate = currentDateUpd.toLocaleDateString("ru-RU", options);
+  const deadline = currentDeadline.toISOString().substring(0, 10);
 
   return (
     <div className="px-6 py-4 flex flex-col justify-center items-center">
@@ -99,7 +101,7 @@ export default async function TodoDetailsPage({ params: { id } }) {
             <ListTodo
               todo={data}
               keyObj="todoDeadline"
-              info={deadLineToDate(data.todoDeadline)}
+              info={deadline}
               inputType="date"
             />
           </li>
