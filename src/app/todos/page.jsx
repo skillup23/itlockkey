@@ -5,14 +5,13 @@ export default function Todos() {
   return (
     <div className="min-h-screen relative">
       <h2 className="mt-2 mb-6 text-2xl font-bold text-center">Задачи</h2>
-      <div className="flex items-start gap-8">
-        <div className="flex justify-around flex-col items-center">
-          <AddTodoForm />
-        </div>
+      <div className="relative ml-4 flex gap-4">
+        <AddTodoForm />
 
-        <div className="w-full flex flex-col items-center">
-          <AllTodos />
-        </div>
+        {/* <h2 className="text-center text-green-400 font-bold mb-4">
+            Текущие задачи
+          </h2> */}
+        <AllTodos />
       </div>
     </div>
   );

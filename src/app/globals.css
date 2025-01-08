@@ -6,26 +6,32 @@ body {
   background-color: #e0e8fd;
 }
 
+h6,
+p {
+  font-size: 14px;
+}
+
 input,
 textarea,
 button,
 select {
   outline: none;
   border-style: none;
-  border-radius: 10px;
+  border-radius: 4px;
   background-color: #eee;
   padding: 10px 15px;
   width: 100%;
   background-color: #e0e8fd;
+  font-size: 14px;
 }
 
-::-webkit-calendar-picker-indicator {
+/* ::-webkit-calendar-picker-indicator {
   padding: 5px;
   padding-right: 25px;
   cursor: pointer;
   border-radius: 3px;
   width: 25px;
-}
+} */
 
 /* Элемент будет вдавленным */
 .inset {
@@ -34,7 +40,7 @@ select {
 
 /* Элемент будет выпуклым */
 .outset {
-  box-shadow: 10px 10px 15px #bfc0c5, -5px -5px 8px #e0e8fd;
+  box-shadow: 1px 1px 5px #bfc0c5, -5px -5px 8px #e0e8fd;
 }
 .outset button:hover {
   background: linear-gradient(145deg, #2b303f, #242935);

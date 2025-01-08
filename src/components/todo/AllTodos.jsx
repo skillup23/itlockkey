@@ -2,6 +2,7 @@ import { deleteTodo } from "@/lib/actionTodo";
 import Todo from "@/model/todoModel";
 import Link from "next/link";
 import React from "react";
+import ListTodo from "./ListTodo";
 
 export default async function AllTodos() {
   try {
@@ -22,48 +23,61 @@ export default async function AllTodos() {
         const year = deadlineDate.getFullYear();
 
         // Formatting the date as MM/DD/YYYY
-        return `${month}/${day}/${year}`;
+        return `${day}/${month}/${year}`;
       };
 
       // Creating a new Date object from the given string
       return (
-        <div className="w-full">
-          <h2 className="text-center text-green-400 font-bold mb-4">
-            Текущие задачи
-          </h2>
-          {todos.reverse().map((todo) => (
-            <div
-              key={todo._id}
-              className="w-full p-4 flex gap-2 my-4 outset rounded-xl"
-            >
-              <div className="w-full flex gap-4 items-center ">
-                <h3>{todo.title}</h3>
-                {/* <h3 className="text-balance">{todo.description}</h3> */}
-                <div className="ml-auto mr-6 flex flex-col justify-between">
-                  <h3>{todo.company}</h3>
+        <div className="mt-12">
+          <div className="absolute top-0 left-[332px]">
+            <button className="w-80 mb-1 text-center text-base font-bold">
+              Фильтры задач
+            </button>
+          </div>
+
+          <div className="flex gap-4 flex-wrap">
+            {todos.reverse().map((todo) => (
+              <div
+                key={todo._id}
+                className="w-80 p-4 flex flex-col gap-2 my-4 outset rounded-xl"
+              >
+                <h6 className="font-bold text-center">{todo.title}</h6>
+                <h6 className="text-balance whitespace-pre-line">
+                  {todo.description}
+                </h6>
+                <div className="w-full mt-auto">
+                  <ListTodo
+                    todo={JSON.parse(JSON.stringify(todo))}
+                    keyObj="status"
+                    info={JSON.parse(JSON.stringify(todo.status))}
+                    inputType="select"
+                  />
+                </div>
+                <div className="w-full flex justify-between">
+                  <h6>{todo.company}</h6>
                   <p>{deadLineToDate(todo.todoDeadline)}</p>
                 </div>
+                <div className="flex justify-between gap-4">
+                  <Link href={`/todos/${todo._id}`}>
+                    <button className="border rounded px-2 bg-red-400">
+                      Подробнее
+                    </button>
+                  </Link>
+                  <form action={deleteTodo}>
+                    <input
+                      hidden
+                      type="text"
+                      name="id"
+                      defaultValue={todo._id.toString()}
+                    />
+                    <button className="border rounded px-2 bg-red-400">
+                      Удалить
+                    </button>
+                  </form>
+                </div>
               </div>
-              <div className="flex gap-4">
-                <Link href={`/todos/${todo._id}`}>
-                  <button className="border rounded px-2 bg-red-400">
-                    Подробнее
-                  </button>
-                </Link>
-                <form action={deleteTodo}>
-                  <input
-                    hidden
-                    type="text"
-                    name="id"
-                    defaultValue={todo._id.toString()}
-                  />
-                  <button className="border rounded px-2 bg-red-400">
-                    Удалить
-                  </button>
-                </form>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       );
     }

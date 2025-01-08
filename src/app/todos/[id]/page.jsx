@@ -20,16 +20,8 @@ export default async function TodoDetailsPage({ params: { id } }) {
     const year = deadlineDate.getFullYear();
 
     // Formatting the date as MM/DD/YYYY
-    return `${month}.${day}.${year}`;
+    return `${day}.${month}.${year}`;
   };
-
-  // const dateCrArr = new Date(data.createdAt);
-  // const dateCreate = `${dateCrArr.getHours()}:${dateCrArr.getMinutes()} ${dateCrArr.getDate()}.${dateCrArr.getMonth()}.${dateCrArr.getFullYear()}`;
-
-  // const dateUpArr = new Date(data.updatedAt);
-  // const dateUpdate = `${dateUpArr.getHours()}:${dateUpArr.getMinutes()} ${dateUpArr.getDate()}.${
-  //   dateUpArr.getMonth() + 1
-  // }.${dateUpArr.getFullYear()}`;
 
   const currentDateCrt = new Date(data.createdAt);
   const currentDateUpd = new Date(data.updatedAt);
@@ -82,6 +74,7 @@ export default async function TodoDetailsPage({ params: { id } }) {
               todo={data}
               keyObj="description"
               info={data.description}
+              inputType="textarea"
             />
           </li>
           <li className="mt-6">
@@ -107,7 +100,7 @@ export default async function TodoDetailsPage({ params: { id } }) {
               todo={data}
               keyObj="todoDeadline"
               info={deadLineToDate(data.todoDeadline)}
-              inputTipe="date"
+              inputType="date"
             />
           </li>
           <li className="mt-6">
@@ -116,7 +109,7 @@ export default async function TodoDetailsPage({ params: { id } }) {
               todo={data}
               keyObj="status"
               info={data.status}
-              inputTipe="select"
+              inputType="select"
             />
           </li>
         </ul>
