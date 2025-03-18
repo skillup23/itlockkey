@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-color: #e0e8fd;
+  background-color: #fff;
 }
 
 h6,
@@ -86,3 +86,5 @@ button:active {
   background: #eff3ff;
   box-shadow: inset 5px 5px 8px #cbcfd9, inset -5px -5px 8px #ffffff;
 } */
+
+/* NAV */
