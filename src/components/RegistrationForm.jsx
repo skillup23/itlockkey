@@ -47,7 +47,7 @@ const RegistrationForm = () => {
         <div className="my-2">
           <label htmlFor="name">Имя пользователя</label>
           <input
-            className="border mx-2 border-gray-500 rounded"
+            className="border mx-2 border-gray-500 rounded-sm"
             type="text"
             name="name"
             id="name"
@@ -57,7 +57,7 @@ const RegistrationForm = () => {
         <div className="my-2">
           <label htmlFor="email">Email</label>
           <input
-            className="border mx-2 border-gray-500 rounded"
+            className="border mx-2 border-gray-500 rounded-sm"
             type="email"
             name="email"
             id="email"
@@ -67,7 +67,7 @@ const RegistrationForm = () => {
         <div className="my-2">
           <label htmlFor="password">Пароль</label>
           <input
-            className="border mx-2 border-gray-500 rounded"
+            className="border mx-2 border-gray-500 rounded-sm"
             type="password"
             name="password"
             id="password"
@@ -76,7 +76,7 @@ const RegistrationForm = () => {
 
         <button
           type="submit"
-          className="bg-orange-300 mt-4 rounded flex justify-center items-center"
+          className="bg-orange-300 mt-4 rounded-sm flex justify-center items-center"
         >
           Зарегистрироваться
         </button>

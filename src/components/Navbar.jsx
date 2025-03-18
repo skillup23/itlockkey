@@ -12,8 +12,11 @@ const Navbar = async () => {
   const userName = loggedInUser?.name;
 
   return (
-    <header className="fixed top-0 left-0 bottom-0 w-[240px] bg-[#F8F8F7]">
-      <nav className="w-full">
+    <header className="">
+      <nav className="fixed top-0 left-[240px] h-10 w-full px-5 flex items-center bg-gray-light drop-shadow-sm">
+        <p>Главная \ Задачи</p>
+      </nav>
+      <nav className="fixed top-0 left-0 bottom-0 w-[240px] bg-gray-light drop-shadow-sm">
         <ul className="flex flex-col">
           {userName ? (
             <Link href="/dashboard" className="p-4 flex flex-col">

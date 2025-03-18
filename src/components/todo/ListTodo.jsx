@@ -10,7 +10,7 @@ export default function ListTodo({ todo, keyObj, info, inputType }) {
   return (
     <>
       {/* {activeEdit ? (
-        <div className="relative outset rounded">
+        <div className="relative outset rounded-sm">
           <p className="w-full p-2 whitespace-pre-line">{info}</p>
           <FilePenLine
             size={24}

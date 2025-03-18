@@ -52,7 +52,7 @@ const LoginForm = () => {
             <div className="my-2 w-full">
               <label htmlFor="email">Email</label>
               <input
-                className="rounded inset-input"
+                className="rounded-sm inset-input"
                 type="email"
                 name="email"
                 id="email"
@@ -62,7 +62,7 @@ const LoginForm = () => {
             <div className="my-2 w-full">
               <label htmlFor="password">Пароль</label>
               <input
-                className="rounded inset-input"
+                className="rounded-sm inset-input"
                 type="password"
                 name="password"
                 id="password"
@@ -71,7 +71,7 @@ const LoginForm = () => {
 
             {/* <button
               type="submit"
-              className="bg-orange-300 mt-4 rounded flex justify-center items-center w-36"
+              className="bg-orange-300 mt-4 rounded-sm flex justify-center items-center w-36"
             >
               Войти
             </button> */}

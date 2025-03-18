@@ -18,13 +18,13 @@ const DashboardPage = async () => {
 
         <Link
           href="/register"
-          className="my-4 p-4 bg-green-500 rounded outset bg-green"
+          className="my-4 p-4 bg-green-500 rounded-sm outset bg-green"
         >
           Добавить нового пользователя
         </Link>
         <Link
           href="/users-edit"
-          className="my-4 p-4 bg-green-500 rounded outset bg-green"
+          className="my-4 p-4 bg-green-500 rounded-sm outset bg-green"
         >
           Редактировать пользователей
         </Link>

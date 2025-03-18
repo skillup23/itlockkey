@@ -8,7 +8,7 @@ const ProductDetailsPage = ({ params: { id } }) => {
       <p>{product.name}</p>
       <p className="my-3">{product.details}</p>
       <Link
-        className="bg-black text-white px-1 rounded"
+        className="bg-black text-white px-1 rounded-sm"
         href={`/products/${id}/checkout`}
       >
         Buy It

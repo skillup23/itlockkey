@@ -57,7 +57,7 @@ export default async function AllTodos() {
                 </div>
                 <div className="flex justify-between gap-4">
                   <Link href={`/todos/${todo._id}`}>
-                    <button className="border rounded px-2 bg-red-400">
+                    <button className="border rounded-sm px-2 bg-red-400">
                       Подробнее
                     </button>
                   </Link>
@@ -68,7 +68,7 @@ export default async function AllTodos() {
                       name="id"
                       defaultValue={todo._id.toString()}
                     />
-                    <button className="border rounded px-2 bg-red-400">
+                    <button className="border rounded-sm px-2 bg-red-400">
                       Удалить
                     </button>
                   </form>

@@ -81,9 +81,9 @@ export default async function TodoDetailsPage({ params: { id } }) {
           </li>
           <li className="mt-6">
             <h6 className="p-1 text-gray-light">Комментарии</h6>
-            <div className="w-full mb-2 p-4 inset rounded">
+            <div className="w-full mb-2 p-4 inset rounded-sm">
               {commentsTest.map((comm, index) => (
-                <p className="mb-4 p-2 bg-blue-light rounded" key={index}>
+                <p className="mb-4 p-2 bg-blue-light rounded-sm" key={index}>
                   {comm}
                 </p>
               ))}
