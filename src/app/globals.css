@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* @theme {
   --color-blue: "#3c52eb";
@@ -22,18 +22,20 @@
 } */
 
 @theme {
-  --color-blue: #1fb6ff;
-  --color-purple: #7e5bef;
-  --color-pink: #ff49db;
-  --color-orange: #e15225;
-  --color-orange-second: #f5744c;
-  --color-orange-third: #f9cbbb;
-  --color-orange-dark: #b04623;
-  --color-orange-light: #f9e1da;
-  --color-green: #13ce66;
-  --color-yellow: #ffc82c;
-  --color-gray-dark: #404040;
-  --color-gray: #8492a6;
+  --color-blue: '#3c52eb';
+  --color-blue-light: '#b3cafe';
+  --color-red: '#e22420';
+  --color-purple: '#7e5bef';
+  --color-purple-light: '#D6E3F3';
+  --color-purple-light: '#E9DCF6';
+  --color-pink: '#e76fca';
+  --color-orange: '#ff7849';
+  --color-green: '#76e99b';
+  --color-green-light: '#DEECDB';
+  --color-yellow: '#ffd765';
+  --color-yellow-light: '#EFE4AC';
+  --color-gray-dark: #636260;
+  --color-gray: #d9d9d9;
   --color-gray-light: #f8f8f7;
 
   --font-sans: Inter, Roboto, sans-serif;
@@ -51,14 +53,14 @@
   body {
     @apply bg-white font-sans;
   }
-  p {
-    @apply text-sm;
+  p,
+  h6 {
+    @apply text-base;
   }
 }
 
-h6,
-p {
-  font-size: 14px;
+html {
+  zoom: 100%;
 }
 
 input,
