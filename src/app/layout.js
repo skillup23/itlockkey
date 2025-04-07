@@ -1,8 +1,7 @@
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 
-import Navbar from "@/components/Navbar";
-
+import Header from "@/components/Header";
 import { dbConnect } from "@/lib/mongo";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,8 +27,8 @@ export default async function RootLayout({ children }) {
       className={`${inter.variable} ${roboto.variable} font-sans`}
     >
       <body className={inter.className}>
-        <Navbar />
-        <main className="ml-[240px] mt-10">{children}</main>
+        <Header />
+        <main className="show-navbar_main">{children}</main>
       </body>
     </html>
   );

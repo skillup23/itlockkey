@@ -1,30 +1,31 @@
-import { auth } from '@/auth';
-import Link from 'next/link';
-import { faqLinks } from '@/data/arch';
+import { auth } from "@/auth";
+import { faqLinks } from "@/data/arch";
+import Link from "next/link";
 
 import {
-  UserRound,
-  ChevronDown,
-  ChevronsLeft,
-  Search,
-  House,
-  Plus,
-  ClipboardList,
   ArchiveRestore,
+  ChevronDown,
+  ClipboardList,
+  House,
   NotebookPen,
-} from 'lucide-react';
-import LeftNavbar from './navbar/LeftNavbar';
-import UserInfo from './navbar/UserInfo';
+  Plus,
+  Search,
+  UserRound,
+} from "lucide-react";
+import LeftNavbar from "./navbar/LeftNavbar";
+import UserInfo from "./navbar/UserInfo";
 
-const Navbar = async () => {
+const Header = async () => {
   const session = await auth();
   const loggedInUser = session?.user;
   const userName = loggedInUser?.name;
 
   return (
-    <header className="font-semibold">
+    <header className="relative font-semibold z-10">
       <nav className="fixed top-0 left-0 h-10 w-full px-5 flex items-center bg-gray-light drop-shadow-sm">
-        <p className="font-normal ml-[240px]">Главная \ Задачи</p>
+        <div className="show-navbar">
+          <p className="font-normal ">Главная \ Задачи</p>
+        </div>
       </nav>
       <LeftNavbar>
         <ul className="w-[183px] flex flex-col">
@@ -75,7 +76,7 @@ const Navbar = async () => {
                 </Link>
               </div>
             ) : (
-              ''
+              ""
             )}
 
             <div className="mt-6 flex items-center gap-4">
@@ -109,4 +110,4 @@ const Navbar = async () => {
   );
 };
 
-export default Navbar;
+export default Header;

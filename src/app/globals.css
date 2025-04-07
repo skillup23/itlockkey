@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* @theme {
   --color-blue: "#3c52eb";
@@ -22,21 +22,23 @@
 } */
 
 @theme {
-  --color-blue: '#3c52eb';
-  --color-blue-light: '#b3cafe';
-  --color-red: '#e22420';
-  --color-purple: '#7e5bef';
-  --color-purple-light: '#D6E3F3';
-  --color-purple-light: '#E9DCF6';
-  --color-pink: '#e76fca';
-  --color-orange: '#ff7849';
-  --color-green: '#76e99b';
-  --color-green-light: '#DEECDB';
-  --color-yellow: '#ffd765';
-  --color-yellow-light: '#EFE4AC';
+  --color-blue: "#3c52eb";
+  --color-blue-light: "#b3cafe";
+  --color-red: "#e22420";
+  --color-purple: "#7e5bef";
+  --color-purple-light: "#D6E3F3";
+  --color-purple-light: "#E9DCF6";
+  --color-pink: "#e76fca";
+  --color-orange: "#ff7849";
+  --color-green: "#76e99b";
+  --color-green-light: "#DEECDB";
+  --color-yellow: "#ffd765";
+  --color-yellow-light: "#EFE4AC";
   --color-gray-dark: #636260;
   --color-gray: #d9d9d9;
   --color-gray-light: #f8f8f7;
+
+  --color-white: #fff;
 
   --font-sans: Inter, Roboto, sans-serif;
 }
@@ -56,6 +58,21 @@
   p,
   h6 {
     @apply text-base;
+  }
+  .show-navbar {
+    @apply ml-[240px];
+  }
+  .hidden-navbar {
+    @apply ml-[40px];
+  }
+  .show-navbar_main {
+    @apply relative ml-[240px] mt-12 z-0;
+  }
+  .hidden-navbar_main {
+    @apply relative ml-[40px] mt-12 z-0;
+  }
+  .shadow-box {
+    @apply bg-white shadow-[0_1px_4px_rgba(0,0,0,0.25)] rounded-xl;
   }
 }
 
@@ -77,6 +94,12 @@ select {
   font-size: 14px;
 }
 
+/* .shadow-box {
+  background: #ffffff;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+} */
+
 /* ::-webkit-calendar-picker-indicator {
   padding: 5px;
   padding-right: 25px;
@@ -86,12 +109,12 @@ select {
 } */
 
 /* Элемент будет вдавленным */
-.inset {
+/* .inset {
   box-shadow: inset -5px -5px 5px #e0e8fd, inset 2px 2px 5px #bfc0c5;
-}
+} */
 
 /* Элемент будет выпуклым */
-.outset {
+/* .outset {
   box-shadow: 1px 1px 5px #bfc0c5, -5px -5px 8px #e0e8fd;
 }
 .outset button:hover {
@@ -128,7 +151,7 @@ select {
 .outset-nav:active {
   background: #282d3b;
   box-shadow: inset 5px 5px 8px #222632, inset -5px -5px 8px #2e3444;
-}
+} */
 
 /* button:hover {
   box-shadow: 5px 5px 5px #bfc0c5, -5px -5px 5px #fff;
