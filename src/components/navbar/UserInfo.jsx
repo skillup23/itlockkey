@@ -1,7 +1,9 @@
 "use client";
 
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Settings } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import Logout from "../Logout";
 
 export default function UserInfo({ user }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -53,8 +55,49 @@ export default function UserInfo({ user }) {
       {isVisible && (
         <div
           ref={blockRef}
-          className="absolute top-8 w-[300px] h-[250px] shadow-box z-50"
-        ></div>
+          className="absolute top-8 min-w-[300px] text-gray-dark shadow-box z-20"
+        >
+          <ul className="p-3 border-b flex flex-col gap-3">
+            <li className="flex">
+              <div className="w-10 h-10 flex justify-center items-center bg-gray">
+                <h6 className="text-2xl">{user.name[0]}</h6>
+              </div>
+              <div className="ml-3 text-black">
+                <p className="text-sm">{user.name}</p>
+                <p className="text-sm text-gray-dark">{user.role}</p>
+              </div>
+            </li>
+            <li className="flex gap-1">
+              <Link
+                className="px-2 py-1 border flex gap-1 rounded-md hover:text-black"
+                href="/dashboard"
+                onClick={toggleVisibility}
+              >
+                <Settings className="w-5" />
+                Настройки
+              </Link>
+              <Logout style="hover:text-black" onClick={toggleVisibility} />
+            </li>
+          </ul>
+
+          <ul className="p-3 border-b flex flex-col gap-2">
+            <li>
+              <Link href="/dashboard" className="hover:text-black">
+                Редактировать пользователей
+              </Link>
+            </li>
+            <li>
+              <Link href="/dashboard" className="hover:text-black">
+                В разработке
+              </Link>
+            </li>
+          </ul>
+
+          <ul className="p-3 flex flex-col gap-3">
+            <li className="text-sm">{user.email}</li>
+            <li className="text-sm">89384266063</li>
+          </ul>
+        </div>
       )}
     </li>
   );

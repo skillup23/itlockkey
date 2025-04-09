@@ -1,13 +1,10 @@
-import { doLogout } from '@/app/actions';
+import { doLogout } from "@/app/actions";
 
-const Logout = () => {
+const Logout = ({ style }) => {
   return (
     <form action={doLogout}>
-      <button
-        className="bg-blue my-2 text-white p-2 rounded-sm mt-10 w-40 mx-auto outset"
-        type="submit"
-      >
-        Выйти
+      <button className={style} type="submit">
+        Выход
       </button>
     </form>
   );

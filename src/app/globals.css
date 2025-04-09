@@ -59,6 +59,9 @@
   h6 {
     @apply text-base;
   }
+  button {
+    @apply px-2 py-1 border flex gap-1 rounded-md cursor-pointer;
+  }
   .show-navbar {
     @apply ml-[240px];
   }
@@ -82,7 +85,6 @@ html {
 
 input,
 textarea,
-button,
 select {
   outline: none;
   border-style: none;
