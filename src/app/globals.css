@@ -26,14 +26,13 @@
   --color-blue-light: "#b3cafe";
   --color-red: "#e22420";
   --color-purple: "#7e5bef";
-  --color-purple-light: "#D6E3F3";
-  --color-purple-light: "#E9DCF6";
+  --color-purple-300: "#D6E3F3";
   --color-pink: "#e76fca";
   --color-orange: "#ff7849";
   --color-green: "#76e99b";
-  --color-green-light: "#DEECDB";
+  --color-green-300: "#DEECDB";
   --color-yellow: "#ffd765";
-  --color-yellow-light: "#EFE4AC";
+  --color-yellow-300: "#EFE4AC";
   --color-gray-dark: #636260;
   --color-gray: #d9d9d9;
   --color-gray-light: #f8f8f7;
@@ -69,7 +68,7 @@
     @apply ml-[40px];
   }
   .show-navbar_main {
-    @apply relative ml-[240px] mt-12 z-0;
+    @apply relative ml-[240px] mt-10 z-0;
   }
   .hidden-navbar_main {
     @apply relative ml-[40px] mt-12 z-0;
@@ -83,9 +82,13 @@ html {
   zoom: 100%;
 }
 
-input,
-textarea,
-select {
+input:focus,
+textarea:focus {
+  outline: none;
+  border: none;
+}
+
+/* textarea {
   outline: none;
   border-style: none;
   border-radius: 4px;
@@ -94,7 +97,7 @@ select {
   width: 100%;
   background-color: #e0e8fd;
   font-size: 14px;
-}
+} */
 
 /* .shadow-box {
   background: #ffffff;
