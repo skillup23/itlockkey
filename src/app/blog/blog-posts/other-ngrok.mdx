@@ -1,0 +1,36 @@
+---
+title: 'Ngrok или доступ к localhost из интернета'
+author: 'Роберт'
+publishDate: '17.04.25'
+group: 'other'
+---
+
+# Ngrok или доступ к localhost из интернета
+
+Ngrok — это сервис, который позволяет открыть доступ к внутренним ресурсам машины (localhost и любой порт), на которой он запущен, из внешней сети, путем создания публичного адреса, все запросы на который будут переброшены на локальный адрес и заданный порт.
+
+Регистрируемся на сайте [https://dashboard.ngrok.com](https://dashboard.ngrok.com)
+
+Устанавливаем ПО согласно инструкциям Setup & Installation [https://dashboard.ngrok.com/get-started/setup](https://dashboard.ngrok.com/get-started/setup)
+
+Получаем свой токен авторизации в разделе Your Authtoken [https://dashboard.ngrok.com/get-started/your-authtoken](https://dashboard.ngrok.com/get-started/your-authtoken)
+
+Запускаем Ngrok и прописываем токен командой
+
+```bash
+ngrok config add-authtoken XXXXXXXXXXXXX
+```
+
+где XXXXXXXXXXXXX ваш токен(в windows запускаем исполняемый файл ngrok.exe, который и откроет свою консоль. На файл ругается браузеры при скачивании)
+
+Далее идем в Domains [https://dashboard.ngrok.com/domains](https://dashboard.ngrok.com/domains) и там добавляем New Domain.
+После создания домена нажимаем на него и вверху справа Start a Tunnel и копируем команду в консоль
+![img1](/images/blog-img/other/ngrok1.jpg)
+
+```bash
+ngrok http --url=yoursdomen.ngrok-free.app 80
+```
+
+На месте порта (80 в примере) может быть любое значение. Должно соответствовать порту, на котором запущено приложение.
+
+Далее открываем домен в браузере по 443 порту и нас втречает стартовая страница ngrok, после нажатия visit site перемещаемся в наше приложение.
