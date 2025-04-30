@@ -1,5 +1,5 @@
-import React from "react";
-import { useFormStatus } from "react-dom";
+import React from 'react';
+import { useFormStatus } from 'react-dom';
 
 export default function SubmitButton({ cssStyle, text, textLoad }) {
   const { pending } = useFormStatus();
@@ -8,8 +8,8 @@ export default function SubmitButton({ cssStyle, text, textLoad }) {
     <button
       type="submit"
       {...(pending && { disabled: true })}
-      className={`mt-10 mx-auto outset ${
-        pending ? "cursor-not-allowed" : "cursor-pointer"
+      className={`mt-10 mx-auto ${
+        pending ? 'cursor-not-allowed' : 'cursor-pointer'
       } ${cssStyle}`}
     >
       {pending ? textLoad : text}

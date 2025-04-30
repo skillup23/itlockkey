@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@plugin "@tailwindcss/typography";
 
 /* @theme {
   --color-blue: "#3c52eb";
@@ -22,17 +24,17 @@
 } */
 
 @theme {
-  --color-blue: "#3c52eb";
-  --color-blue-light: "#b3cafe";
-  --color-red: "#e22420";
-  --color-purple: "#7e5bef";
-  --color-purple-300: "#D6E3F3";
-  --color-pink: "#e76fca";
-  --color-orange: "#ff7849";
-  --color-green: "#76e99b";
-  --color-green-300: "#DEECDB";
-  --color-yellow: "#ffd765";
-  --color-yellow-300: "#EFE4AC";
+  --color-blue: '#3c52eb';
+  --color-blue-light: '#b3cafe';
+  --color-red: '#e22420';
+  --color-purple: '#7e5bef';
+  --color-purple-300: '#D6E3F3';
+  --color-pink: '#e76fca';
+  --color-orange: '#ff7849';
+  --color-green: '#76e99b';
+  --color-green-300: '#DEECDB';
+  --color-yellow: '#ffd765';
+  --color-yellow-300: '#EFE4AC';
   --color-gray-dark: #636260;
   --color-gray: #d9d9d9;
   --color-gray-light: #f8f8f7;
@@ -52,7 +54,7 @@
   }
 
   body {
-    @apply bg-white font-sans;
+    @apply relative bg-white font-sans;
   }
   p,
   h6 {
@@ -75,6 +77,9 @@
   }
   .shadow-box {
     @apply bg-white shadow-[0_1px_4px_rgba(0,0,0,0.25)] rounded-xl;
+  }
+  .prose {
+    @apply !max-w-[700px];
   }
 }
 
