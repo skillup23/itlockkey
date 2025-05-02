@@ -13,6 +13,7 @@ import {
   UserRound,
 } from "lucide-react";
 import LeftNavbar from "./navbar/LeftNavbar";
+import NewTask from "./navbar/NewTask";
 import UserInfo from "./navbar/UserInfo";
 
 const Header = async () => {
@@ -56,10 +57,11 @@ const Header = async () => {
                 <Link href="/todos" className="hover:text-black">
                   <h6>Задачи</h6>
                 </Link>
-                <div className="flex items-center cursor-pointer gap-[11px] hover:text-black">
+                <NewTask>
                   <Plus className="w-4" />
                   <h6>Новая задача</h6>
-                </div>
+                </NewTask>
+
                 <Link
                   href="/todos"
                   className="flex items-center gap-[11px] hover:text-black"

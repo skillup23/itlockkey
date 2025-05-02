@@ -1,4 +1,5 @@
 import React from "react";
+import ButtomDeleteTodo from "./ButtomDeleteTodo";
 import ListTodo from "./ListTodo";
 
 export default function AllTodos({ todos }) {
@@ -30,7 +31,7 @@ export default function AllTodos({ todos }) {
         {todos.reverse().map((todo) => (
           <div
             key={todo._id}
-            className="w-65 p-4 flex flex-col gap-3 bg-white border rounded-[10px]"
+            className="relative w-65 p-4 flex flex-col gap-3 bg-white border rounded-[10px]"
           >
             <ListTodo
               todo={JSON.parse(JSON.stringify(todo))}
@@ -61,6 +62,8 @@ export default function AllTodos({ todos }) {
               info={todo.company}
               inputType="selectCompany"
             />
+
+            <ButtomDeleteTodo idTodo={todo._id.toString()} />
 
             {/* <h6 className="text-balance whitespace-pre-line">
               {todo.description}

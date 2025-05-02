@@ -36,6 +36,22 @@ export const createTodos = async (formData) => {
 export const deleteTodo = async (id) => {
   // Извлечение идентификатора задачи
   const todoId = id.get("id");
+
+  try {
+    await Todo.deleteOne({ _id: todoId });
+    // Запуск повторной проверки указанного пути ("/todo")
+    revalidatePath("/todo");
+    return "задача удалена";
+  } catch (error) {
+    return { message: "ошибка удаления задачи" };
+  }
+};
+
+// Новый метод удаления
+export const deleteTodoNew = async (id) => {
+  // Извлечение идентификатора задачи
+  const todoId = id.idTodo;
+
   try {
     await Todo.deleteOne({ _id: todoId });
     // Запуск повторной проверки указанного пути ("/todo")

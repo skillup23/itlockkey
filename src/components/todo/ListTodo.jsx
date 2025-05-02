@@ -1,5 +1,6 @@
 "use client";
 
+import { company, status } from "@/data/arch";
 import { updateTodos } from "@/lib/actionTodo";
 import { useEffect, useRef, useState } from "react";
 
@@ -99,12 +100,19 @@ export default function ListTodo({ todo, keyObj, info, inputType, cssClass }) {
               info == "Открыта" && "bg-green-200"
             } ${info == "В работе" && "bg-purple-200"} ${
               info == "Ожидание" && "bg-yellow-200"
-            } ${info == "Закрыта" && "bg-blue-200"}`}
+            } ${info == "Закрыта" && "bg-blue-200"} ${
+              info == "Архив" && "bg-red-200"
+            } `}
           >
-            <option value="Открыта">Открыта</option>
+            {status.map((item, index) => (
+              <option value={item} key={index}>
+                {item}
+              </option>
+            ))}
+            {/* <option value="Открыта">Открыта</option>
             <option value="В работе">В работе</option>
             <option value="Ожидание">Ожидание</option>
-            <option value="Закрыта">Закрыта</option>
+            <option value="Закрыта">Закрыта</option> */}
           </select>
         )}
         {inputType == "selectCompany" && (
@@ -114,12 +122,17 @@ export default function ListTodo({ todo, keyObj, info, inputType, cssClass }) {
             onChange={handleSelectChange}
             className={`p-1 text-sm rounded bg-gray-200`}
           >
-            <option value="АНБ офис">АНБ</option>
+            {company.map((item, index) => (
+              <option value={item} key={index}>
+                {item}
+              </option>
+            ))}
+            {/* <option value="АНБ офис">АНБ офис</option>
             <option value="АЗС">АЗС</option>
             <option value="Химзащита">Химзащита</option>
             <option value="Никострой">Никострой</option>
             <option value="АЗС Ростов">АЗС Ростов</option>
-            <option value="Дораконтинент">Дораконтинент</option>
+            <option value="Дораконтинент">Дораконтинент</option> */}
           </select>
         )}
         {inputType == "textarea" && (
