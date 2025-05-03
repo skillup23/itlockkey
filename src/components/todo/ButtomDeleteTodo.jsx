@@ -2,56 +2,51 @@
 
 import { deleteTodoNew } from "@/lib/actionTodo";
 import { Trash2 } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { useFormState } from "react-dom";
+import SubmitButton from "../SubmitButton";
 
 function ButtomDeleteTodo(idTodo) {
   const dialogRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [state, formAction] = useFormState(deleteTodoNew, null);
 
-  const handleBackdropClick = (e) => {
-    // Закрываем только если клик был именно по dialog (не по его содержимому)
-    if (e.target === dialogRef.current) {
-      dialogRef.current.close();
-    }
-  };
-
-  // Немедленно отправляем форму при изменении выбора
-  const handleChange = (e) => {
-    e.target.form.requestSubmit();
-    dialogRef.current.close();
-  };
+  // Закрываем модальное окно после успешной отправки
+  if (state?.success) {
+    setTimeout(() => setIsOpen(false), 1000);
+  }
 
   return (
     <div className="relative">
       <Trash2
-        onClick={() => dialogRef.current.showModal()}
-        className="absolute bottom-4 right-4 w-4 text-gray hover:text-gray-dark cursor-pointer"
+        onClick={() => setIsOpen(true)}
+        className="absolute bottom-0 right-0 w-4 text-gray hover:text-gray-dark cursor-pointer"
       />
-      <dialog
-        ref={dialogRef}
-        className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 backdrop:bg-black backdrop:opacity-20"
-        onClick={handleBackdropClick}
-      >
-        <h2>Подтвердите удаление</h2>
-        <form
-          action={async () => {
-            await deleteTodoNew(idTodo);
-          }}
-        >
-          <input hidden type="text" name="id" defaultValue={idTodo} />
-          <button
-            onClick={() => dialogRef.current.close()}
-            className="border rounded-sm px-2 bg-red-400"
+      {isOpen && (
+        <div className="absolute -top-4 -right-16 p-2 bg-white border rounded-[10px] text-base z-30">
+          <h6 className="text-center">Удалить?</h6>
+          <form
+            action={async () => {
+              await deleteTodoNew(idTodo);
+            }}
           >
-            Удалить
-          </button>
-          <div
-            onClick={() => dialogRef.current.close()}
-            className="border rounded-sm px-2 bg-red-400 cursor-pointer"
-          >
-            Нет
-          </div>
-        </form>
-      </dialog>
+            <div className="flex">
+              <input hidden type="text" name="id" defaultValue={idTodo} />
+              <SubmitButton
+                textLoad="..."
+                text="Да"
+                cssStyle="border rounded-sm px-2 bg-red-400"
+              />
+              <div
+                onClick={() => setIsOpen(false)}
+                className="border rounded-sm px-2 py-1 bg-red-400 cursor-pointer"
+              >
+                Нет
+              </div>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 }

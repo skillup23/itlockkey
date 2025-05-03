@@ -31,38 +31,39 @@ export default function AllTodos({ todos }) {
         {todos.reverse().map((todo) => (
           <div
             key={todo._id}
-            className="relative w-65 p-4 flex flex-col gap-3 bg-white border rounded-[10px]"
+            className="relative w-65 p-4 bg-white border rounded-[10px]"
           >
-            <ListTodo
-              todo={JSON.parse(JSON.stringify(todo))}
-              keyObj="title"
-              info={todo.title}
-              cssClass="text-base leading-5 font-semibold"
-            />
-            <ListTodo
-              todo={JSON.parse(JSON.stringify(todo))}
-              keyObj="status"
-              info={todo.status}
-              inputType="selectStatus"
-            />
-            <ListTodo
-              todo={JSON.parse(JSON.stringify(todo))}
-              keyObj="todoDeadline"
-              info={deadLineToDate(todo.todoDeadline)}
-              inputType="date"
-            />
-            <ListTodo
-              todo={JSON.parse(JSON.stringify(todo))}
-              keyObj="description"
-              info={todo.description}
-            />
-            <ListTodo
-              todo={JSON.parse(JSON.stringify(todo))}
-              keyObj="company"
-              info={todo.company}
-              inputType="selectCompany"
-            />
-
+            <div className="flex flex-col gap-3">
+              <ListTodo
+                todo={JSON.parse(JSON.stringify(todo))}
+                keyObj="title"
+                info={todo.title}
+                cssClass="text-base leading-5 font-semibold"
+              />
+              <ListTodo
+                todo={JSON.parse(JSON.stringify(todo))}
+                keyObj="status"
+                info={todo.status}
+                inputType="selectStatus"
+              />
+              <ListTodo
+                todo={JSON.parse(JSON.stringify(todo))}
+                keyObj="todoDeadline"
+                info={deadLineToDate(todo.todoDeadline)}
+                inputType="date"
+              />
+              <ListTodo
+                todo={JSON.parse(JSON.stringify(todo))}
+                keyObj="description"
+                info={todo.description}
+              />
+              <ListTodo
+                todo={JSON.parse(JSON.stringify(todo))}
+                keyObj="company"
+                info={todo.company}
+                inputType="selectCompany"
+              />
+            </div>
             <ButtomDeleteTodo idTodo={todo._id.toString()} />
 
             {/* <h6 className="text-balance whitespace-pre-line">

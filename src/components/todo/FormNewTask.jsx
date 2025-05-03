@@ -108,7 +108,7 @@ export default function FormNewTask({ children }) {
               /> */}
 
         <SubmitButton
-          cssStyle="bg-blue text-black w-1/3 flex justify-center hover:bg-gray"
+          cssStyle="mt-4 mx-auto bg-blue text-black w-1/3 flex justify-center hover:bg-gray"
           text="Добавить задачу"
           textLoad="Добавление..."
         />

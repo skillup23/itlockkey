@@ -17,7 +17,7 @@ export default function NewTask({ children }) {
   return (
     <div>
       <div
-        onClick={() => dialogRef.current.show()}
+        onClick={() => dialogRef.current.showModal()}
         className="flex items-center cursor-pointer gap-[11px] hover:text-black"
       >
         {children}
