@@ -25,7 +25,7 @@ function useDebounce(value, delay) {
   return debouncedValue;
 }
 
-export default function ListTodo({ todo, keyObj, info, inputType, cssClass }) {
+export default function ListTodo({ id, keyObj, info, inputType, cssClass }) {
   // Автоматическая отправка формы используя debouncedValue
   const [inputValue, setInputValue] = useState("");
   const formRef = useRef(null);
@@ -77,7 +77,7 @@ export default function ListTodo({ todo, keyObj, info, inputType, cssClass }) {
       <form
         ref={formRef}
         action={async (FormData) => {
-          await updateTodos(todo._id, FormData, keyObj);
+          await updateTodos(id, FormData, keyObj);
         }}
         className="relative w-full flex text-sm gap-2"
       >

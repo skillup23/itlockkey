@@ -105,6 +105,7 @@ export const updateTodos = async (id, FormData, keyObj) => {
     }
 
     revalidatePath("/todo/[id]", "page");
+    revalidatePath("/todos", "page");
     return "Задача обновлена";
   } catch (error) {
     return { message: "ошибка обновления данных" };
