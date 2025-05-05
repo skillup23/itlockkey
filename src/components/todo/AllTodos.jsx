@@ -15,9 +15,12 @@ export default function AllTodos({ todos }) {
     fetchTasks();
   }, [todos]);
 
-  // Фильтрация задач
+  // Фильтрация задач по статусу
   const openTasks = tasks.filter((task) => task.status === "Открыта");
   const completedTasks = tasks.filter((task) => task.status === "В работе");
+  const timestopTasks = tasks.filter((task) => task.status === "Ожидание");
+  const closedTasks = tasks.filter((task) => task.status === "Закрыта");
+  const archTasks = tasks.filter((task) => task.status === "Архив");
 
   return (
     <div className="mt-12">
@@ -28,49 +31,40 @@ export default function AllTodos({ todos }) {
       </div>
 
       <div className="flex gap-5 overflow-x-auto">
-        <div className="flex flex-col gap-5">
-          <h6>Открыта</h6>
+        <div className="w-[260px] flex flex-col gap-5">
+          <h6 className="px-4 bg-green-200 rounded-md">Открыта</h6>
           {openTasks.reverse().map((todo) => (
             <TodoCard key={todo._id} {...todo} />
           ))}
         </div>
 
-        <div className="flex flex-col gap-5">
-          <h6>В работе</h6>
+        <div className="w-[260px] flex flex-col gap-5">
+          <h6 className="px-4 bg-purple-200 rounded-md">В работе</h6>
           {completedTasks.reverse().map((todo) => (
             <TodoCard key={todo._id} {...todo} />
           ))}
         </div>
 
-        <div className="flex flex-col gap-5">
-          <h6>Ожидание</h6>
-          {todos
-            .filter((item) => item.status === "Ожидание")
-            .reverse()
-            .map((todo) => (
-              <TodoCard key={todo._id} {...todo} />
-            ))}
+        <div className="w-[260px] flex flex-col gap-5">
+          <h6 className="px-4 bg-yellow-200 rounded-md">Ожидание</h6>
+          {timestopTasks.reverse().map((todo) => (
+            <TodoCard key={todo._id} {...todo} />
+          ))}
         </div>
 
-        <div className="flex flex-col gap-5">
-          <h6>Закрыта</h6>
-          {todos
-            .filter((item) => item.status === "Закрыта")
-            .reverse()
-            .map((todo) => (
-              <TodoCard key={todo._id} {...todo} />
-            ))}
+        <div className="w-[260px] flex flex-col gap-5">
+          <h6 className="px-4 bg-blue-200 rounded-md">Закрыта</h6>
+          {closedTasks.reverse().map((todo) => (
+            <TodoCard key={todo._id} {...todo} />
+          ))}
         </div>
 
-        {/* <div className="flex flex-col gap-5">
-          <h6>Архив</h6>
-          {todos
-            .filter((item) => item.status === "Архив")
-            .reverse()
-            .map((todo) => (
-              <TodoCard key={todo._id} {...todo} />
-            ))}
-        </div> */}
+        <div className="w-[260px] flex flex-col gap-5">
+          <h6 className="px-4 bg-red-200 rounded-md">Архив</h6>
+          {archTasks.reverse().map((todo) => (
+            <TodoCard key={todo._id} {...todo} />
+          ))}
+        </div>
       </div>
     </div>
   );
