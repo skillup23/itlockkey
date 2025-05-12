@@ -1,6 +1,6 @@
-import { getPostBySlug } from '@/util/utils';
-import Link from 'next/link';
-import React from 'react';
+import { getPostBySlug } from "@/util/utils";
+import Link from "next/link";
+import React from "react";
 
 const getPageData = async (slug) => {
   const { meta, content } = await getPostBySlug(slug);
@@ -17,16 +17,15 @@ export default async function Post({ params }) {
 
   return (
     <section className="p-4 mb-10">
-      <article className="container py-4 m-auto prose prose-pre:mt-2">
+      <article className="container py-4 m-auto prose">
         {content}
         <h6 className="text-right">Автор: {meta.author}</h6>
         <h6 className="text-right">Дата публикации: {meta.publishDate}</h6>
-        <Link
-          className="mt-16 p-4 bg-slate-800 text-white rounded-md no-underline hover:bg-slate-900"
-          href="/blog"
-        >
-          Вернуться назад
-        </Link>
+        <button className="ml-auto mt-4">
+          <Link className="no-underline" href="/blog">
+            Вернуться назад
+          </Link>
+        </button>
       </article>
     </section>
   );

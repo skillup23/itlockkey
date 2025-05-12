@@ -46,38 +46,27 @@ const LoginForm = () => {
         <div>
           <p className="text-xl text-red-500">{error}</p>
           <form
-            className="my-5 flex flex-col items-start p-5 outset rounded-2xl"
+            className="w-[305px] flex flex-col items-start rounded-2xl gap-4"
             onSubmit={handleFormSubmit}
           >
-            <div className="my-2 w-full">
-              <label htmlFor="email">Email</label>
-              <input
-                className="rounded-sm inset-input"
-                type="email"
-                name="email"
-                id="email"
-              />
-            </div>
+            <input
+              className="w-full p-1 rounded-md placeholder-center text-center border"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+            />
 
-            <div className="my-2 w-full">
-              <label htmlFor="password">Пароль</label>
-              <input
-                className="rounded-sm inset-input"
-                type="password"
-                name="password"
-                id="password"
-              />
-            </div>
-
-            {/* <button
-              type="submit"
-              className="bg-orange-300 mt-4 rounded-sm flex justify-center items-center w-36"
-            >
-              Войти
-            </button> */}
+            <input
+              className="w-full p-1 rounded-md placeholder-center text-center border"
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Пароль"
+            />
 
             <SubmitButton
-              cssStyle="bg-blue text-white"
+              cssStyle="w-full flex justify-center text-black bg-gray-light hover:bg-gray"
               text="Войти"
               textLoad="Входим..."
             />

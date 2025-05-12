@@ -33,9 +33,9 @@ const Header = async () => {
           {userName ? (
             <UserInfo user={session?.user} />
           ) : (
-            <Link href="/login" className="">
+            <Link href="/login" className="flex items-center gap-2">
               <UserRound size={20} />
-              <h6 className="text-xl">Войти</h6>
+              <h6 className="text-lg">Войти</h6>
             </Link>
           )}
 

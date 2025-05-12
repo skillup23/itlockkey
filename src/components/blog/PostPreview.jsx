@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { getPostsMetaData } from '@/util/utils';
+import { getPostsMetaData } from "@/util/utils";
+import Link from "next/link";
 
 export default async function PostPreview({ groupTitle, groupName }) {
   const posts = await getPostsMetaData(groupName);
@@ -12,7 +12,7 @@ export default async function PostPreview({ groupTitle, groupName }) {
           <Link
             href={`/blog/${post.slug}`}
             key={index}
-            className="p-8 border border-slate-800 min-w-40 max-w-96 hover:shadow-xl shadow-slate-900"
+            className="flex p-8 border min-w-40 max-w-96 hover:shadow-xl"
           >
             <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
             <p className="font-medium">{post.author}</p>
