@@ -1,10 +1,23 @@
 "use client";
 
-import React from "react";
+import { ChevronsDown } from "lucide-react";
+import React, { useState } from "react";
 import ButtomDeleteTodo from "./ButtomDeleteTodo";
 import ListTodo from "./ListTodo";
 
 function TodoCard(todo) {
+  const [isOpenComments, setIsOpenComments] = useState(false);
+  const [isComments, setIsComments] = useState(JSON.parse(todo.comments));
+
+  // // Загрузка комментариев
+  // useEffect(() => {
+  //   const fetchTasks = async () => {
+  //     const data = await todo;
+  //     setIsComments(JSON.parse(data.comments));
+  //   };
+  //   fetchTasks();
+  // }, [todo]);
+
   //изменение формата даты дд.мм.гггг
   const deadLineToDate = (todoDeadline) => {
     // const currentDateCrt = new Date(data.createdAt);
@@ -54,7 +67,56 @@ function TodoCard(todo) {
           inputType="selectCompany"
         />
       </div>
-      <ButtomDeleteTodo idTodo={todo._id.toString()} />
+
+      {/*========= Кнопка раскрыть комментарии ==========*/}
+      <div className="relative">
+        <div
+          className={`absolute bottom-0 w-6 h-6 text-gray hover:text-gray-dark cursor-pointer z-30 ${
+            isOpenComments ? "-right-1 -top-9" : "right-6"
+          }`}
+        >
+          <ChevronsDown
+            onClick={() => setIsOpenComments(!isOpenComments)}
+            className={`${isOpenComments ? "rotate-180" : ""}`}
+          />
+          <p
+            className={`absolute -top-2 right-0 text-xs ${
+              isOpenComments ? "hidden" : "block"
+            }`}
+          >
+            {isComments.length}
+          </p>
+        </div>
+
+        {/*========= Блок с Комментариями ==========*/}
+        {isOpenComments && (
+          <div className="mt-3 w-full">
+            <h6 className="font-semibold text-sm text-center">Комментарии</h6>
+            {isComments.map((item) => (
+              <div className="relative group">
+                <p
+                  key={item._id}
+                  className="w-full mt-2 p-1 text-sm border-1 rounded cursor-pointer"
+                >
+                  {item.text}
+                </p>
+                <div className="absolute z-10 hidden group-hover:block bg-gray text-xs rounded p-1 whitespace-nowrap bottom-full right-0 mb-0">
+                  {deadLineToDate(item.createdAt)}
+                </div>
+              </div>
+            ))}
+            <ListTodo
+              inputType="comment"
+              id={todo._id.toString()}
+              keyObj="comment"
+              cssClass="!w-11/12"
+            />
+          </div>
+        )}
+
+        {/*========= Кнопка удалить карточку ==========*/}
+        {!isOpenComments && <ButtomDeleteTodo idTodo={todo._id.toString()} />}
+      </div>
     </div>
   );
 }

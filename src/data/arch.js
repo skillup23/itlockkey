@@ -56,4 +56,6 @@ const company = [
 
 const status = ["Открыта", "В работе", "Ожидание", "Закрыта", "Архив"];
 
-export { company, faqLinks, status };
+const usersList = ["Роберт Анисимов", "Денис Киреев", "Владимир Калмыков"];
+
+export { company, faqLinks, status, usersList };

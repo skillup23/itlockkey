@@ -30,7 +30,7 @@ export default function AllTodos({ todos }) {
         </button>
       </div>
 
-      <div className="flex gap-5 overflow-x-auto">
+      <div className="pb-10 flex gap-5 overflow-x-auto">
         <div className="w-[260px] flex flex-col gap-5">
           <h6 className="px-4 bg-green-200 rounded-md">Открыта</h6>
           {openTasks.reverse().map((todo) => (

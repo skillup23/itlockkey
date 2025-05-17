@@ -4,7 +4,7 @@ import { ChevronsRight } from "lucide-react";
 import { useRef } from "react";
 import FormNewTask from "../todo/FormNewTask";
 
-export default function NewTask({ children }) {
+export default function NewTask({ userName, children }) {
   const dialogRef = useRef(null);
 
   const handleBackdropClick = (e) => {

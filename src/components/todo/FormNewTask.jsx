@@ -1,6 +1,6 @@
 "use client";
 
-import { company, status } from "@/data/arch";
+import { company, status, usersList } from "@/data/arch";
 import { createTodos } from "@/lib/actionTodo";
 import { useRef } from "react";
 import SubmitButton from "../SubmitButton";
@@ -19,7 +19,7 @@ export default function FormNewTask({ children }) {
           await createTodos(FormData);
           //   setShow(!show);
         }}
-        className="w-full my-4 p-6 flex flex-col rounded-xl text-sm"
+        className="w-full my-4 p-6 flex flex-col rounded-xl text-sm gap-2"
         autoComplete="off"
       >
         {/* <label htmlFor="title" className="py-2">
@@ -28,7 +28,7 @@ export default function FormNewTask({ children }) {
         <input
           type="text"
           name="title"
-          className="mb-2 w-full py-2 px-3 text-lg"
+          className="w-full py-2 px-3 text-lg"
           placeholder="НОВАЯ ЗАДАЧА"
           required
         />
@@ -39,7 +39,7 @@ export default function FormNewTask({ children }) {
           <textarea
             type="text"
             name="description"
-            className="mb-2 w-2/3 py-2 px-3"
+            className="w-2/3 py-2 px-3"
             placeholder="Пусто"
             required
             rows="2"
@@ -55,7 +55,7 @@ export default function FormNewTask({ children }) {
             type="text"
             name="company"
             placeholder="Пусто"
-            className="mb-2 py-2 px-3 appearance-none"
+            className="py-2 px-3 appearance-none"
             required
           >
             <option value="Пусто" className="text-gray">
@@ -77,7 +77,7 @@ export default function FormNewTask({ children }) {
             type="text"
             name="status"
             placeholder="Открыта"
-            className="mb-2 py-2 px-3 appearance-none"
+            className="py-2 px-3 appearance-none"
             required
           >
             {status.map((item, index) => (
@@ -98,6 +98,42 @@ export default function FormNewTask({ children }) {
             className="py-2 px-3"
             required
           />
+        </div>
+
+        <div className="px-3 flex">
+          <label htmlFor="executor" className="py-2 w-[150px]">
+            Исполнитель
+          </label>
+          <select
+            type="text"
+            name="executor"
+            className="py-2 px-3 appearance-none"
+            required
+          >
+            {usersList.map((item, index) => (
+              <option value={item} key={index}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="px-3 flex">
+          <label htmlFor="manager" className="py-2 w-[150px]">
+            Постановщик
+          </label>
+          <select
+            type="text"
+            name="manager"
+            className="py-2 px-3 appearance-none"
+            required
+          >
+            {usersList.map((item, index) => (
+              <option value={item} key={index}>
+                {item}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* <input

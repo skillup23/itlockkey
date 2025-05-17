@@ -10,7 +10,9 @@ export const createTodos = async (formData) => {
   const description = formData.get("description");
   const company = formData.get("company");
   const todoDeadline = formData.get("todoDeadline");
-  const status = "Открыта";
+  const status = formData.get("status");
+  const executor = formData.get("executor");
+  const manager = formData.get("manager");
   try {
     // Создание новой задачи с помощью модели Todo
     const newTodo = await Todo.create({
@@ -19,6 +21,8 @@ export const createTodos = async (formData) => {
       company,
       todoDeadline,
       status,
+      executor,
+      manager,
     });
     // Сохранение нового элемента в списке дел
     newTodo.save();
@@ -102,9 +106,30 @@ export const updateTodos = async (id, FormData, keyObj) => {
           status: update,
         }
       );
+    } else if (keyObj === "executor") {
+      await Todo.updateOne(
+        { _id: id },
+        {
+          executor: update,
+        }
+      );
+    } else if (keyObj === "manager") {
+      await Todo.updateOne(
+        { _id: id },
+        {
+          manager: update,
+        }
+      );
+    } else if (keyObj === "comment") {
+      console.log(update);
+      await Todo.updateOne(
+        { _id: id },
+        { $push: { comments: { text: update } } }, // Добавляем просто строку
+        { new: true } // в конец массива
+      );
     }
 
-    revalidatePath("/todo/[id]", "page");
+    // revalidatePath("/todo/[id]", "page");
     revalidatePath("/todos", "page");
     return "Задача обновлена";
   } catch (error) {

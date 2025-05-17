@@ -2,6 +2,7 @@
 
 import { company, status } from "@/data/arch";
 import { updateTodos } from "@/lib/actionTodo";
+import { SquareCheckBig } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 // Кастомный хук для debounce откладываем выполнение функции (отправку формы)
@@ -145,6 +146,25 @@ export default function ListTodo({ id, keyObj, info, inputType, cssClass }) {
             rows="8"
             cols="20"
           />
+        )}
+        {inputType == "comment" && (
+          <div className="mt-2 p-1 w-full flex border-1 rounded-md">
+            <textarea
+              type="text"
+              name={keyObj}
+              className={`w-full min-h-2 resize-none overflow-hidden ${cssClass}`}
+              placeholder="Новый комментарий..."
+              required
+              rows={2}
+              // onChange={(e) => setInputValue(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="h-6 p-0 border-0 cursor-pointer hover:bg-inherit"
+            >
+              <SquareCheckBig className="w-5 text-gray hover:text-gray-dark cursor-pointer" />
+            </button>
+          </div>
         )}
         {!inputType && (
           <textarea
