@@ -70,7 +70,7 @@ const Header = async () => {
                   <h6>Текущие задачи</h6>
                 </Link>
                 <Link
-                  href="/todos"
+                  href="/todos/archTodos"
                   className="flex items-center gap-[11px] hover:text-black"
                 >
                   <ArchiveRestore className="w-4" />

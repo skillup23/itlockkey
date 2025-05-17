@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import TodoCard from "./TodoCard";
 
-export default function AllTodos({ todos }) {
+export default function AllTodos({ todos, userName }) {
   const [tasks, setTasks] = useState([]);
 
   // Загрузка задач
@@ -20,7 +20,7 @@ export default function AllTodos({ todos }) {
   const completedTasks = tasks.filter((task) => task.status === "В работе");
   const timestopTasks = tasks.filter((task) => task.status === "Ожидание");
   const closedTasks = tasks.filter((task) => task.status === "Закрыта");
-  const archTasks = tasks.filter((task) => task.status === "Архив");
+  // const archTasks = tasks.filter((task) => task.status === "Архив");
 
   return (
     <div className="mt-12">
@@ -34,37 +34,37 @@ export default function AllTodos({ todos }) {
         <div className="w-[260px] flex flex-col gap-5">
           <h6 className="px-4 bg-green-200 rounded-md">Открыта</h6>
           {openTasks.reverse().map((todo) => (
-            <TodoCard key={todo._id} {...todo} />
+            <TodoCard key={todo._id} {...todo} userName={userName} />
           ))}
         </div>
 
         <div className="w-[260px] flex flex-col gap-5">
           <h6 className="px-4 bg-purple-200 rounded-md">В работе</h6>
           {completedTasks.reverse().map((todo) => (
-            <TodoCard key={todo._id} {...todo} />
+            <TodoCard key={todo._id} {...todo} userName={userName} />
           ))}
         </div>
 
         <div className="w-[260px] flex flex-col gap-5">
           <h6 className="px-4 bg-yellow-200 rounded-md">Ожидание</h6>
           {timestopTasks.reverse().map((todo) => (
-            <TodoCard key={todo._id} {...todo} />
+            <TodoCard key={todo._id} {...todo} userName={userName} />
           ))}
         </div>
 
         <div className="w-[260px] flex flex-col gap-5">
           <h6 className="px-4 bg-blue-200 rounded-md">Закрыта</h6>
           {closedTasks.reverse().map((todo) => (
-            <TodoCard key={todo._id} {...todo} />
+            <TodoCard key={todo._id} {...todo} userName={userName} />
           ))}
         </div>
 
-        <div className="w-[260px] flex flex-col gap-5">
+        {/* <div className="w-[260px] flex flex-col gap-5">
           <h6 className="px-4 bg-red-200 rounded-md">Архив</h6>
           {archTasks.reverse().map((todo) => (
-            <TodoCard key={todo._id} {...todo} />
+            <TodoCard key={todo._id} {...todo} userName={userName}/>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

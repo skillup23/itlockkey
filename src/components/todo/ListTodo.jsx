@@ -27,26 +27,25 @@ function useDebounce(value, delay) {
 }
 
 export default function ListTodo({ id, keyObj, info, inputType, cssClass }) {
-  // Автоматическая отправка формы используя debouncedValue
+  //============= Автоматическая отправка формы используя debouncedValue ===========
   const [inputValue, setInputValue] = useState("");
   const formRef = useRef(null);
   const debouncedValue = useDebounce(inputValue, 2000);
 
-  // Немедленно отправляем форму при изменении выбора
-  const handleSelectChange = (e) => {
-    e.target.form.requestSubmit();
-  };
-
   useEffect(() => {
     if (debouncedValue && formRef.current) {
-      console.log("Отправка данных:", debouncedValue);
+      // console.log("Отправка данных:", debouncedValue);
       formRef.current.requestSubmit();
     }
   }, [debouncedValue]);
 
-  // Автоматическое изменине textarea
-  const textareaRef = useRef(null);
+  //============= Немедленно отправляем форму select при изменении выбора ===========
+  const handleSelectChange = (e) => {
+    e.target.form.requestSubmit();
+  };
 
+  //============= Автоматическое изменине высоты textarea ==============
+  const textareaRef = useRef(null);
   useEffect(() => {
     if (textareaRef.current) {
       // Сбрасываем высоту чтобы получить правильный scrollHeight
@@ -56,7 +55,7 @@ export default function ListTodo({ id, keyObj, info, inputType, cssClass }) {
     }
   }, [inputValue]);
 
-  // // Отправка данных при клике вне input
+  // //============= Отправка данных при клике вне input ==============
   // const handleClickOutside = (e) => {
   //   if (formRef.current && !formRef.current.contains(e.target)) {
   //     formRef.current.requestSubmit();
@@ -160,9 +159,12 @@ export default function ListTodo({ id, keyObj, info, inputType, cssClass }) {
             />
             <button
               type="submit"
-              className="h-6 p-0 border-0 cursor-pointer hover:bg-inherit"
+              className="relative h-6 p-0 border-0 cursor-pointer hover:bg-inherit group"
             >
               <SquareCheckBig className="w-5 text-gray hover:text-gray-dark cursor-pointer" />
+              <div className="absolute z-10 hidden group-hover:block bg-gray text-xs rounded p-1 whitespace-nowrap bottom-full right-0 mb-0">
+                Сохранить
+              </div>
             </button>
           </div>
         )}

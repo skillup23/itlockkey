@@ -1,8 +1,8 @@
 import { auth } from "@/auth";
-import AllTodos from "@/components/todo/AllTodos";
+import ArchTodos from "@/components/todo/ArchTodos";
 import Todo from "@/model/todoModel";
 
-export default async function Todos() {
+export default async function archTodos() {
   const session = await auth();
   const loggedInUser = session?.user;
   const userName = loggedInUser?.name;
@@ -11,7 +11,7 @@ export default async function Todos() {
     const todos = await Todo.find();
 
     const data = todos
-      .filter((item) => item.executor === userName)
+      .filter((item) => item.executor === userName && item.status === "Архив")
       .map((item) => {
         let {
           _id,
@@ -41,14 +41,10 @@ export default async function Todos() {
         };
       });
 
-    // const dataUser = data.filter((item) => item.executor === userName);
-
-    // console.log(data);
-
     if (data.length === 0) {
       return (
         <div className="min-h-screen relative p-4">
-          <h2 className="text-xl font-medium">У вас нет текущих задач</h2>
+          <h2 className="text-xl font-medium">У вас нет задач в архиве</h2>
         </div>
       );
     } else {
@@ -56,7 +52,7 @@ export default async function Todos() {
         <div className="min-h-screen relative p-4">
           <h2 className="text-xl font-medium">Задачи</h2>
           <div className="relative ml-4 flex gap-4">
-            <AllTodos todos={data} userName={userName} />
+            <ArchTodos todos={data} userName={userName} />
           </div>
         </div>
       );

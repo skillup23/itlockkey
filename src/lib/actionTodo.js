@@ -1,4 +1,5 @@
 "use server";
+import { auth } from "@/auth";
 import { dbConnect } from "@/lib/mongo";
 import Todo from "@/model/todoModel";
 import { revalidatePath } from "next/cache";
@@ -69,6 +70,9 @@ export const deleteTodoNew = async (id) => {
 // Обновление задачи с указанным идентификатором
 export const updateTodos = async (id, FormData, keyObj) => {
   const update = FormData.get(keyObj);
+  const session = await auth();
+  const loggedInUser = session?.user;
+  const userName = loggedInUser?.name;
 
   try {
     if (keyObj === "title") {
@@ -121,10 +125,10 @@ export const updateTodos = async (id, FormData, keyObj) => {
         }
       );
     } else if (keyObj === "comment") {
-      console.log(update);
+      console.log(update, userName);
       await Todo.updateOne(
         { _id: id },
-        { $push: { comments: { text: update } } }, // Добавляем просто строку
+        { $push: { comments: { text: update, author: userName } } }, // Добавляем просто строку
         { new: true } // в конец массива
       );
     }

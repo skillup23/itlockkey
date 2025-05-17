@@ -5,17 +5,17 @@ import React, { useState } from "react";
 import ButtomDeleteTodo from "./ButtomDeleteTodo";
 import ListTodo from "./ListTodo";
 
-function TodoCard(todo) {
+function TodoCard(todo, userName) {
   const [isOpenComments, setIsOpenComments] = useState(false);
   const [isComments, setIsComments] = useState(JSON.parse(todo.comments));
 
   // // Загрузка комментариев
   // useEffect(() => {
-  //   const fetchTasks = async () => {
+  //   const fetchComments = async () => {
   //     const data = await todo;
   //     setIsComments(JSON.parse(data.comments));
   //   };
-  //   fetchTasks();
+  //   fetchComments();
   // }, [todo]);
 
   //изменение формата даты дд.мм.гггг
@@ -35,7 +35,7 @@ function TodoCard(todo) {
   };
 
   return (
-    <div className="relative w-65 p-4 bg-white border rounded-[10px]">
+    <div className="h-fit relative w-65 p-4 bg-white border rounded-[10px]">
       <div className="flex flex-col gap-3">
         <ListTodo
           id={todo._id.toString()}
@@ -93,11 +93,8 @@ function TodoCard(todo) {
           <div className="mt-3 w-full">
             <h6 className="font-semibold text-sm text-center">Комментарии</h6>
             {isComments.map((item) => (
-              <div className="relative group">
-                <p
-                  key={item._id}
-                  className="w-full mt-2 p-1 text-sm border-1 rounded cursor-pointer"
-                >
+              <div key={item._id.toString()} className="relative group">
+                <p className="w-full mt-2 p-1 text-sm border-1 rounded cursor-pointer">
                   {item.text}
                 </p>
                 <div className="absolute z-10 hidden group-hover:block bg-gray text-xs rounded p-1 whitespace-nowrap bottom-full right-0 mb-0">
