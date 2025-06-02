@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import TodoCard from "./TodoCard";
+import React, { useEffect, useState } from 'react';
+import TodoCard from './TodoCard';
 
 export default function ArchTodos({ todos, userName }) {
   const [tasks, setTasks] = useState([]);
@@ -16,7 +16,7 @@ export default function ArchTodos({ todos, userName }) {
   }, [todos]);
 
   // Фильтрация задач по статусу
-  const archTasks = tasks.filter((task) => task.status === "Архив");
+  const archTasks = tasks.filter((task) => task.status === 'Архив');
 
   return (
     <div className="mt-12">
@@ -28,7 +28,7 @@ export default function ArchTodos({ todos, userName }) {
 
       <div className="pb-10 flex gap-5 overflow-x-auto">
         <div className="flex flex-col gap-5">
-          <h6 className="w-[260px] px-4 bg-red-200 rounded-md">Архив задач</h6>
+          <h6 className="w-[320px] px-4 bg-red-200 rounded-md">Архив задач</h6>
           <div className="flex flex-wrap gap-5">
             {archTasks.reverse().map((todo) => (
               <TodoCard key={todo._id} {...todo} userName={userName} />

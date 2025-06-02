@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { deleteTodoNew } from "@/lib/actionTodo";
-import { Trash2 } from "lucide-react";
-import { useState } from "react";
-import SubmitButton from "../SubmitButton";
+import { deleteTodoNew } from '@/lib/actionTodo';
+import { Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import SubmitButton from '../SubmitButton';
 
 function ButtomDeleteTodo(idTodo) {
   // const dialogRef = useRef(null);
@@ -19,7 +19,7 @@ function ButtomDeleteTodo(idTodo) {
     <>
       <Trash2
         onClick={() => setIsOpen(true)}
-        className="absolute bottom-0 -right-1 w-5 text-gray hover:text-gray-dark cursor-pointer"
+        className="absolute bottom-0 right-6 w-5 text-gray hover:text-gray-dark cursor-pointer"
       />
       {isOpen && (
         <div className="absolute -top-4 -right-16 p-2 bg-white border rounded-[10px] text-base z-30">
