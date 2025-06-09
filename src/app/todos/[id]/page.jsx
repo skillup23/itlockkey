@@ -1,14 +1,14 @@
-import ListTodo from "@/components/todo/ListTodo";
-import Todo from "@/model/todoModel";
+import ListTodo from '@/components/todo/ListTodo';
+import Todo from '@/model/todo-model';
 
 export default async function TodoDetailsPage({ params: { id } }) {
   const todo = await Todo.findOne({ _id: id });
   const data = JSON.parse(JSON.stringify(todo));
 
   const commentsTest = [
-    "Тестовый комментарий 1",
-    "Заметка 2",
-    "Длинный комментарий с большим колличеством текста, написанный, чтобы все это посмотреть, как это все получается и удается",
+    'Тестовый комментарий 1',
+    'Заметка 2',
+    'Длинный комментарий с большим колличеством текста, написанный, чтобы все это посмотреть, как это все получается и удается',
   ];
 
   // const deadLineToDate = (todoDeadline) => {
@@ -27,12 +27,12 @@ export default async function TodoDetailsPage({ params: { id } }) {
   const currentDateUpd = new Date(data.updatedAt);
   const currentDeadline = new Date(data.todoDeadline);
   const options = {
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
   };
-  const dateCreate = currentDateCrt.toLocaleDateString("ru-RU", options);
-  const dateUpdate = currentDateUpd.toLocaleDateString("ru-RU", options);
+  const dateCreate = currentDateCrt.toLocaleDateString('ru-RU', options);
+  const dateUpdate = currentDateUpd.toLocaleDateString('ru-RU', options);
   const deadline = currentDeadline.toISOString().substring(0, 10);
 
   return (

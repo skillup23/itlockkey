@@ -1,6 +1,6 @@
-import { auth } from "@/auth";
-import AllTodos from "@/components/todo/AllTodos";
-import Todo from "@/model/todoModel";
+import { auth } from '@/auth';
+import AllTodos from '@/components/todo/AllTodos';
+import Todo from '@/model/todo-model';
 
 export default async function Todos() {
   const session = await auth();

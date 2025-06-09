@@ -1,6 +1,6 @@
-import { auth } from "@/auth";
-import ArchTodos from "@/components/todo/ArchTodos";
-import Todo from "@/model/todoModel";
+import { auth } from '@/auth';
+import ArchTodos from '@/components/todo/ArchTodos';
+import Todo from '@/model/todo-model';
 
 export default async function archTodos() {
   const session = await auth();
@@ -11,7 +11,7 @@ export default async function archTodos() {
     const todos = await Todo.find();
 
     const data = todos
-      .filter((item) => item.executor === userName && item.status === "Архив")
+      .filter((item) => item.executor === userName && item.status === 'Архив')
       .map((item) => {
         let {
           _id,

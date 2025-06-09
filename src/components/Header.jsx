@@ -1,6 +1,6 @@
-import { auth } from "@/auth";
-import { faqLinks } from "@/data/arch";
-import Link from "next/link";
+import { auth } from '@/auth';
+import { faqLinks } from '@/data/arch';
+import Link from 'next/link';
 
 import {
   ArchiveRestore,
@@ -11,10 +11,10 @@ import {
   Plus,
   Search,
   UserRound,
-} from "lucide-react";
-import LeftNavbar from "./navbar/LeftNavbar";
-import NewTask from "./navbar/NewTask";
-import UserInfo from "./navbar/UserInfo";
+} from 'lucide-react';
+import LeftNavbar from './navbar/LeftNavbar';
+import NewTask from './navbar/NewTask';
+import UserInfo from './navbar/UserInfo';
 
 const Header = async () => {
   const session = await auth();
@@ -76,9 +76,16 @@ const Header = async () => {
                   <ArchiveRestore className="w-4" />
                   <h6>Архив</h6>
                 </Link>
+                <Link
+                  href="/todos/all-company"
+                  className="flex items-center gap-[11px] hover:text-black"
+                >
+                  <ArchiveRestore className="w-4" />
+                  <h6>Организации</h6>
+                </Link>
               </div>
             ) : (
-              ""
+              ''
             )}
 
             <div className="mt-6 flex items-center gap-4">
