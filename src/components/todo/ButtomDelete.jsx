@@ -1,11 +1,10 @@
-'use client';
+"use client";
 
-import { deleteTodoNew } from '@/lib/actionTodo';
-import { Trash2 } from 'lucide-react';
-import { useState } from 'react';
-import SubmitButton from '../SubmitButton';
+import { Trash2 } from "lucide-react";
+import { useState } from "react";
+import SubmitButton from "../SubmitButton";
 
-function ButtomDeleteTodo(idTodo) {
+function ButtomDeleteTodo({ idItem, cssClass, onSubmitAction }) {
   // const dialogRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   // const [state, formAction] = useFormState(deleteTodoNew, null);
@@ -19,18 +18,18 @@ function ButtomDeleteTodo(idTodo) {
     <>
       <Trash2
         onClick={() => setIsOpen(true)}
-        className="absolute bottom-0 right-6 w-5 text-gray hover:text-gray-dark cursor-pointer"
+        className={`w-5 hover:text-gray-dark cursor-pointer ${cssClass}`}
       />
       {isOpen && (
         <div className="absolute -top-4 -right-16 p-2 bg-white border rounded-[10px] text-base z-30">
           <h6 className="text-center">Удалить?</h6>
           <form
             action={async () => {
-              await deleteTodoNew(idTodo);
+              await onSubmitAction(idItem);
             }}
           >
             <div className="flex">
-              <input hidden type="text" name="id" defaultValue={idTodo} />
+              <input hidden type="text" name="id" defaultValue={idItem} />
               <SubmitButton
                 textLoad="..."
                 text="Да"

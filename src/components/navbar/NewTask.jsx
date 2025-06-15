@@ -4,7 +4,7 @@ import { ChevronsRight } from "lucide-react";
 import { useRef } from "react";
 import FormNewTask from "../todo/FormNewTask";
 
-export default function NewTask({ userName, children }) {
+export default function NewTask({ userName, dataCompany, children }) {
   const dialogRef = useRef(null);
 
   const handleBackdropClick = (e) => {
@@ -28,7 +28,7 @@ export default function NewTask({ userName, children }) {
         className="relative"
         onClick={handleBackdropClick}
       >
-        <FormNewTask>
+        <FormNewTask dataCompany={dataCompany}>
           <ChevronsRight
             onClick={() => dialogRef.current.close()}
             className="cursor-pointer"

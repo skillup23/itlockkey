@@ -1,13 +1,14 @@
 "use client";
 
-import { company, status, usersList } from "@/data/arch";
+import { status, usersList } from "@/data/arch";
 import { createTodos } from "@/lib/actionTodo";
 import { useRef } from "react";
 import SubmitButton from "../SubmitButton";
 
-export default function FormNewTask({ children }) {
-  // const [show, setShow] = useState(true);
+export default function FormNewTask({ dataCompany, children }) {
   const ref = useRef(null);
+
+  const company = dataCompany;
 
   return (
     <div className="fixed right-0 top-0 w-1/2 h-screen p-2 bg-white border shadow-xl z-30">
@@ -61,9 +62,9 @@ export default function FormNewTask({ children }) {
             <option value="Пусто" className="text-gray">
               Пусто
             </option>
-            {company.map((item, index) => (
-              <option value={item} key={index}>
-                {item}
+            {company.map((item) => (
+              <option value={item.title} key={item._id}>
+                {item.title}
               </option>
             ))}
           </select>

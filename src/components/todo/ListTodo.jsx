@@ -1,6 +1,6 @@
 "use client";
 
-import { company, status } from "@/data/arch";
+import { status } from "@/data/arch";
 import { updateTodos } from "@/lib/actionTodo";
 import { SquareCheckBig } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -26,7 +26,14 @@ function useDebounce(value, delay) {
   return debouncedValue;
 }
 
-export default function ListTodo({ id, keyObj, info, inputType, cssClass }) {
+export default function ListTodo({
+  id,
+  keyObj,
+  info,
+  inputType,
+  cssClass,
+  dataCompany,
+}) {
   //============= Автоматическая отправка формы используя debouncedValue ===========
   const [inputValue, setInputValue] = useState("");
   const formRef = useRef(null);
@@ -54,23 +61,6 @@ export default function ListTodo({ id, keyObj, info, inputType, cssClass }) {
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   }, [inputValue]);
-
-  // //============= Отправка данных при клике вне input ==============
-  // const handleClickOutside = (e) => {
-  //   if (formRef.current && !formRef.current.contains(e.target)) {
-  //     formRef.current.requestSubmit();
-  //   }
-  // };
-
-  // // Добавляем обработчик при монтировании
-  // useEffect(() => {
-  //   document.addEventListener("mousedown", handleClickOutside);
-
-  //   // Функция cleanup - удаляем обработчик при размонтировании
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []); // Пустой массив зависимостей - эффект выполняется только при монтировании
 
   return (
     <>
@@ -109,10 +99,6 @@ export default function ListTodo({ id, keyObj, info, inputType, cssClass }) {
                 {item}
               </option>
             ))}
-            {/* <option value="Открыта">Открыта</option>
-            <option value="В работе">В работе</option>
-            <option value="Ожидание">Ожидание</option>
-            <option value="Закрыта">Закрыта</option> */}
           </select>
         )}
         {inputType == "selectCompany" && (
@@ -122,17 +108,11 @@ export default function ListTodo({ id, keyObj, info, inputType, cssClass }) {
             onChange={handleSelectChange}
             className={`p-1 text-sm rounded bg-gray-200`}
           >
-            {company.map((item, index) => (
-              <option value={item} key={index}>
-                {item}
+            {dataCompany.map((item) => (
+              <option value={item.title} key={item._id}>
+                {item.title}
               </option>
             ))}
-            {/* <option value="АНБ офис">АНБ офис</option>
-            <option value="АЗС">АЗС</option>
-            <option value="Химзащита">Химзащита</option>
-            <option value="Никострой">Никострой</option>
-            <option value="АЗС Ростов">АЗС Ростов</option>
-            <option value="Дораконтинент">Дораконтинент</option> */}
           </select>
         )}
         {inputType == "textarea" && (
@@ -180,16 +160,35 @@ export default function ListTodo({ id, keyObj, info, inputType, cssClass }) {
             onChange={(e) => setInputValue(e.target.value)}
           />
         )}
+      </form>
+    </>
+  );
+}
 
-        {/* <button
+// //============= Отправка данных при клике вне input ==============
+// const handleClickOutside = (e) => {
+//   if (formRef.current && !formRef.current.contains(e.target)) {
+//     formRef.current.requestSubmit();
+//   }
+// };
+
+// // Добавляем обработчик при монтировании
+// useEffect(() => {
+//   document.addEventListener("mousedown", handleClickOutside);
+
+//   // Функция cleanup - удаляем обработчик при размонтировании
+//   return () => {
+//     document.removeEventListener("mousedown", handleClickOutside);
+//   };
+// }, []); // Пустой массив зависимостей - эффект выполняется только при монтировании
+
+// console.log(dataCompany);
+{
+  /* <button
           type="submit"
           // className="absolute w-6 right-2 top-2 p-0 text-orange"
           className="w-8 h-9 p-1 text-orange bg-white"
         >
           <Save size={24} />
-        </button> */}
-      </form>
-      {/* )} */}
-    </>
-  );
+        </button> */
 }

@@ -1,7 +1,8 @@
-import { auth } from '@/auth';
-import { faqLinks } from '@/data/arch';
-import Link from 'next/link';
+import { auth } from "@/auth";
+import { faqLinks } from "@/data/arch";
+import Link from "next/link";
 
+import Company from "@/model/company-model";
 import {
   ArchiveRestore,
   ChevronDown,
@@ -11,15 +12,29 @@ import {
   Plus,
   Search,
   UserRound,
-} from 'lucide-react';
-import LeftNavbar from './navbar/LeftNavbar';
-import NewTask from './navbar/NewTask';
-import UserInfo from './navbar/UserInfo';
+} from "lucide-react";
+import LeftNavbar from "./navbar/LeftNavbar";
+import NewTask from "./navbar/NewTask";
+import UserInfo from "./navbar/UserInfo";
 
 const Header = async () => {
   const session = await auth();
   const loggedInUser = session?.user;
   const userName = loggedInUser?.name;
+
+  const companies = await Company.find();
+  const dataCompany = companies
+    .filter((item) => item.autor === userName)
+    .map((item) => {
+      let { _id, title, autor, createdAt, updatedAt } = item;
+      return {
+        _id: _id.toString(),
+        title,
+        autor,
+        createdAt: createdAt.toString(),
+        updatedAt: updatedAt.toString(),
+      };
+    });
 
   return (
     <header className="relative font-semibold z-10">
@@ -57,7 +72,7 @@ const Header = async () => {
                 <Link href="/todos" className="hover:text-black">
                   <h6>Задачи</h6>
                 </Link>
-                <NewTask>
+                <NewTask dataCompany={dataCompany}>
                   <Plus className="w-4" />
                   <h6>Новая задача</h6>
                 </NewTask>
@@ -85,7 +100,7 @@ const Header = async () => {
                 </Link>
               </div>
             ) : (
-              ''
+              ""
             )}
 
             <div className="mt-6 flex items-center gap-4">

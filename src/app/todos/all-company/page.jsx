@@ -1,7 +1,9 @@
-import { auth } from '@/auth';
-import React from 'react';
-import Company from '@/model/company-model';
-import FormNewCompany from '@/components/todo/FormNewCompany';
+import { auth } from "@/auth";
+import ButtomDeleteTodo from "@/components/todo/ButtomDelete";
+import FormNewCompany from "@/components/todo/FormNewCompany";
+import { deleteCompany } from "@/lib/actionCompany";
+import Company from "@/model/company-model";
+import React from "react";
 
 export default async function AllCompany() {
   const session = await auth();
@@ -35,15 +37,27 @@ export default async function AllCompany() {
       );
     } else {
       return (
-        <div className="min-h-screen relative p-4">
+        <div className="min-h-screen relative py-4 px-6">
           <h2 className="text-xl font-medium">Организации</h2>
-          <div className="relative ml-4 flex gap-4">
-            {data.map((item) => (
-              <p key={item._id}>{item.title}</p>
-            ))}
+          <div className="relative mt-2 flex items-start gap-8">
+            <div className="flex flex-col gap-2">
+              {data.map((item) => (
+                <div
+                  key={item._id}
+                  className="relative p-1 flex justify-between items-center gap-6 bg-gray rounded"
+                >
+                  <p className="w-full">{item.title}</p>
+                  {/* <Trash2 className="w-5 cursor-pointer" /> */}
+                  <ButtomDeleteTodo
+                    idItem={item._id.toString()}
+                    onSubmitAction={deleteCompany}
+                  />
+                </div>
+              ))}
+            </div>
 
-            <div>
-              <h3 className="mt-8">Добавить новую организацию</h3>
+            <div className="p-1 bg-gray-light rounded">
+              <h3 className="text-center">Добавить новую организацию</h3>
               <FormNewCompany />
             </div>
           </div>

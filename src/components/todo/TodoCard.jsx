@@ -1,14 +1,17 @@
-'use client';
+"use client";
 
-import { ChevronsDown } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
-import ButtomDeleteTodo from './ButtomDeleteTodo';
-import ListTodo from './ListTodo';
+import { deleteTodoNew } from "@/lib/actionTodo";
+import { ChevronsDown } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import ButtomDeleteTodo from "./ButtomDelete";
+import ListTodo from "./ListTodo";
 
 function TodoCard(todo, userName) {
   // const [isDeadlineBorder, setIsDeadlineBorder] = useState('');
   const [isOpenComments, setIsOpenComments] = useState(false);
-  const [isComments, setIsComments] = useState('');
+  const [isComments, setIsComments] = useState("");
+
+  // console.log(todo.dataCompany);
 
   // // Загрузка комментариев
   // useEffect(() => {
@@ -28,14 +31,14 @@ function TodoCard(todo, userName) {
   const totalDate = Math.ceil((dateDeadline - dateNow) / (1000 * 60 * 60 * 24));
 
   const colorBorder = (time, status) => {
-    if (status === 'Закрыта') {
-      return 'border-blue-400';
+    if (status === "Закрыта") {
+      return "border-blue-400";
     } else if (time < 1) {
-      return 'border-red-400';
+      return "border-red-400";
     } else if (time < 3) {
-      return 'border-orange-300';
+      return "border-orange-300";
     } else {
-      return '';
+      return "";
     }
   };
 
@@ -94,6 +97,7 @@ function TodoCard(todo, userName) {
           keyObj="company"
           info={todo.company}
           inputType="selectCompany"
+          dataCompany={todo.dataCompany}
         />
       </div>
 
@@ -104,11 +108,11 @@ function TodoCard(todo, userName) {
         >
           <ChevronsDown
             onClick={() => setIsOpenComments(!isOpenComments)}
-            className={`${isOpenComments ? 'rotate-180 -top-6' : ''}`}
+            className={`${isOpenComments ? "rotate-180 -top-6" : ""}`}
           />
           <p
             className={`absolute -top-2 right-0 text-xs ${
-              isOpenComments ? 'hidden' : 'block'
+              isOpenComments ? "hidden" : "block"
             }`}
           >
             {isComments.length}
@@ -139,7 +143,13 @@ function TodoCard(todo, userName) {
         )}
 
         {/*========= Кнопка удалить карточку ==========*/}
-        {!isOpenComments && <ButtomDeleteTodo idTodo={todo._id.toString()} />}
+        {!isOpenComments && (
+          <ButtomDeleteTodo
+            idItem={todo._id.toString()}
+            onSubmitAction={deleteTodoNew}
+            cssClass="absolute bottom-0 right-6 text-gray"
+          />
+        )}
       </div>
     </div>
   );
