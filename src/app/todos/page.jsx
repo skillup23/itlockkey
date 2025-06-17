@@ -1,7 +1,7 @@
-import { auth } from "@/auth";
-import AllTodos from "@/components/todo/AllTodos";
-import Company from "@/model/company-model";
-import Todo from "@/model/todo-model";
+import { auth } from '@/auth';
+import AllTodos from '@/components/todo/AllTodos';
+import Company from '@/model/company-model';
+import Todo from '@/model/todo-model';
 
 export default async function Todos() {
   const session = await auth();
@@ -45,13 +45,10 @@ export default async function Todos() {
     const dataCompany = companies
       .filter((item) => item.autor === userName)
       .map((item) => {
-        let { _id, title, autor, createdAt, updatedAt } = item;
+        let { _id, title, autor } = item;
         return {
           _id: _id.toString(),
           title,
-          autor,
-          createdAt: createdAt.toString(),
-          updatedAt: updatedAt.toString(),
         };
       });
 

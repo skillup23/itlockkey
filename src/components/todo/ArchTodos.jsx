@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import TodoCard from './TodoCard';
 
-export default function ArchTodos({ todos, userName }) {
+export default function ArchTodos({ todos, dataCompany, userName }) {
   const [tasks, setTasks] = useState([]);
 
   // Загрузка задач
@@ -31,7 +31,12 @@ export default function ArchTodos({ todos, userName }) {
           <h6 className="w-[320px] px-4 bg-red-200 rounded-md">Архив задач</h6>
           <div className="flex flex-wrap gap-5">
             {archTasks.reverse().map((todo) => (
-              <TodoCard key={todo._id} {...todo} userName={userName} />
+              <TodoCard
+                key={todo._id}
+                {...todo}
+                userName={userName}
+                dataCompany={dataCompany}
+              />
             ))}
           </div>
         </div>

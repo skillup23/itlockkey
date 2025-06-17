@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import TodoCard from "./TodoCard";
+import React, { useEffect, useState } from 'react';
+import TodoCard from './TodoCard';
 
 export default function AllTodos({ todos, dataCompany, userName }) {
   const [tasks, setTasks] = useState([]);
@@ -16,10 +16,10 @@ export default function AllTodos({ todos, dataCompany, userName }) {
   }, [todos]);
 
   // Фильтрация задач по статусу
-  const openTasks = tasks.filter((task) => task.status === "Открыта");
-  const completedTasks = tasks.filter((task) => task.status === "В работе");
-  const timestopTasks = tasks.filter((task) => task.status === "Ожидание");
-  const closedTasks = tasks.filter((task) => task.status === "Закрыта");
+  const openTasks = tasks.filter((task) => task.status === 'Открыта');
+  const completedTasks = tasks.filter((task) => task.status === 'В работе');
+  const timestopTasks = tasks.filter((task) => task.status === 'Ожидание');
+  const closedTasks = tasks.filter((task) => task.status === 'Закрыта');
 
   return (
     <div className="mt-12">

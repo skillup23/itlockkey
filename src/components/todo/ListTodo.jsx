@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { status } from "@/data/arch";
-import { updateTodos } from "@/lib/actionTodo";
-import { SquareCheckBig } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { status } from '@/data/arch';
+import { updateTodos } from '@/lib/actionTodo';
+import { SquareCheckBig } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 // Кастомный хук для debounce откладываем выполнение функции (отправку формы)
 // до тех пор, пока не пройдет указанное время (2 секунды) без новых изменений.
@@ -35,7 +35,7 @@ export default function ListTodo({
   dataCompany,
 }) {
   //============= Автоматическая отправка формы используя debouncedValue ===========
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
   const formRef = useRef(null);
   const debouncedValue = useDebounce(inputValue, 2000);
 
@@ -56,7 +56,7 @@ export default function ListTodo({
   useEffect(() => {
     if (textareaRef.current) {
       // Сбрасываем высоту чтобы получить правильный scrollHeight
-      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = 'auto';
       // Устанавливаем новую высоту на основе содержимого
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
@@ -68,10 +68,13 @@ export default function ListTodo({
         ref={formRef}
         action={async (FormData) => {
           await updateTodos(id, FormData, keyObj);
+          if (inputType == 'comment') {
+            formRef.current?.reset();
+          }
         }}
         className="relative w-full flex text-sm gap-2"
       >
-        {inputType == "date" && (
+        {inputType == 'date' && (
           <input
             type="date"
             name={keyObj}
@@ -81,17 +84,17 @@ export default function ListTodo({
             onChange={handleSelectChange}
           />
         )}
-        {inputType == "selectStatus" && (
+        {inputType == 'selectStatus' && (
           <select
             name={keyObj}
             defaultValue={info}
             onChange={handleSelectChange}
             className={`p-1 text-sm rounded ${
-              info == "Открыта" && "bg-green-200"
-            } ${info == "В работе" && "bg-purple-200"} ${
-              info == "Ожидание" && "bg-yellow-200"
-            } ${info == "Закрыта" && "bg-blue-200"} ${
-              info == "Архив" && "bg-red-200"
+              info == 'Открыта' && 'bg-green-200'
+            } ${info == 'В работе' && 'bg-purple-200'} ${
+              info == 'Ожидание' && 'bg-yellow-200'
+            } ${info == 'Закрыта' && 'bg-blue-200'} ${
+              info == 'Архив' && 'bg-red-200'
             } `}
           >
             {status.map((item, index) => (
@@ -101,7 +104,7 @@ export default function ListTodo({
             ))}
           </select>
         )}
-        {inputType == "selectCompany" && (
+        {inputType == 'selectCompany' && (
           <select
             name={keyObj}
             defaultValue={info}
@@ -115,7 +118,7 @@ export default function ListTodo({
             ))}
           </select>
         )}
-        {inputType == "textarea" && (
+        {inputType == 'textarea' && (
           <textarea
             type="text"
             name={keyObj}
@@ -126,7 +129,7 @@ export default function ListTodo({
             cols="20"
           />
         )}
-        {inputType == "comment" && (
+        {inputType == 'comment' && (
           <div className="mt-2 p-1 w-full flex border-1 rounded-md">
             <textarea
               type="text"

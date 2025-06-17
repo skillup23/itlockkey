@@ -1,48 +1,37 @@
-"use client";
+'use client';
 
-import { deleteTodoNew } from "@/lib/actionTodo";
-import { ChevronsDown } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import ButtomDeleteTodo from "./ButtomDelete";
-import ListTodo from "./ListTodo";
+import { deleteTodoNew } from '@/lib/actionTodo';
+import { ChevronsDown } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import ButtomDeleteTodo from './ButtomDelete';
+import ListTodo from './ListTodo';
 
-function TodoCard(todo, userName) {
+function TodoCard(todo) {
   // const [isDeadlineBorder, setIsDeadlineBorder] = useState('');
   const [isOpenComments, setIsOpenComments] = useState(false);
-  const [isComments, setIsComments] = useState("");
+  const [isComments, setIsComments] = useState('');
 
-  // console.log(todo.dataCompany);
-
-  // // Загрузка комментариев
-  // useEffect(() => {
-  //   const fetchComments = async () => {
-  //     const data = await todo;
-  //     setIsComments(JSON.parse(data.comments));
-  //   };
-  //   fetchComments();
-  // }, [todo]);
-
+  // Загрузка комментариев
   useEffect(() => {
     setIsComments(JSON.parse(todo.comments));
   }, [todo]);
 
+  // Операции с датой для последующего подсчета Дедлайна задачи и окрашивания в красный цвет границы
   const dateNow = new Date();
   const dateDeadline = new Date(todo.todoDeadline);
   const totalDate = Math.ceil((dateDeadline - dateNow) / (1000 * 60 * 60 * 24));
 
   const colorBorder = (time, status) => {
-    if (status === "Закрыта") {
-      return "border-blue-400";
+    if (status === 'Закрыта') {
+      return 'border-blue-400';
     } else if (time < 1) {
-      return "border-red-400";
+      return 'border-red-400';
     } else if (time < 3) {
-      return "border-orange-300";
+      return 'border-orange-300';
     } else {
-      return "";
+      return '';
     }
   };
-
-  // colorBorder(totalDate);
 
   //изменение формата даты дд.мм.гггг
   const deadLineToDate = (todoDeadline) => {
@@ -108,11 +97,11 @@ function TodoCard(todo, userName) {
         >
           <ChevronsDown
             onClick={() => setIsOpenComments(!isOpenComments)}
-            className={`${isOpenComments ? "rotate-180 -top-6" : ""}`}
+            className={`${isOpenComments ? 'rotate-180 -top-6' : ''}`}
           />
           <p
             className={`absolute -top-2 right-0 text-xs ${
-              isOpenComments ? "hidden" : "block"
+              isOpenComments ? 'hidden' : 'block'
             }`}
           >
             {isComments.length}
