@@ -1,0 +1,130 @@
+---
+title: 'CloudPub установка клиента на Ubuntu'
+author: 'Роберт'
+publishDate: '05.08.25'
+group: 'ubuntu'
+---
+
+# CloudPub установка клиента на Ubuntu
+
+CloudPub — сервис для доступа к локальным ресурсам за NAT без белого IP. Альтернатива Ngrok, Cloudflared и другим туннельным сервисам.
+
+Регистрируемся на сайте [https://cloudpub.ru](https://cloudpub.ru)
+
+Устанавливаем ПО согласно инструкциям [https://cloudpub.ru/docs](https://cloudpub.ru/docs)
+
+Получаем свой токен авторизации в разделе **Установка** [https://cloudpub.ru/dashboard/](https://cloudpub.ru/dashboard/)
+
+Если мы имеем Ubuntu Server, то официальная инструкция позволит запускать программу CLO только вручную, поэтому дополню, как правильно установить все с 0 до автоматического запуска и поддержания ПО в рабочем состоянии:
+
+Будем устанавливать через бинарный файл.
+Скачайте архив (обратите внимание на актуальную версию в официальной документации)
+
+```bash
+wget https://cloudpub.ru/download/stable/clo-2.3.1-stable-linux-x86_64.tar.gz
+```
+
+Распакуйте архив при помощи команды
+
+```bash
+tar -xvf clo-2.3.1-stable-linux-x86_64.tar.gz
+```
+
+Распакуется исполняемый файл **clo**
+Его нужно переместить в **/usr/local/bin/**
+
+```bash
+sudo mv clo /usr/local/bin/
+sudo chmod +x /usr/local/bin/clo
+```
+
+После этого в командной строке возможны операции через вызов приложения **clo**
+
+```bash
+clo -V
+```
+
+Дополнительные команды можно посмотреть в документации [https://cloudpub.ru/docs/cli](https://cloudpub.ru/docs/cli)
+
+Теперь можно добавить токен или ключ API из раздела [https://cloudpub.ru/dashboard/](https://cloudpub.ru/dashboard/)
+
+```bash
+clo set token ваш-токен
+```
+
+Для публикации локального HTTP сервера работающего на порте 8080 выполните команду:
+
+```bash
+clo publish http 8080
+```
+
+После этого вам будет предоставлен URL, по которому ваш ресурс будет доступен в интернете, например:
+
+```bash
+Сервис опубликован: http://localhost:8080 -> https://wildly-suitable-fish.cloudpub.ru
+```
+
+## Создание systemd-сервиса
+
+Если программа должна работать как служба (например, сервер), лучше создать юнит systemd.
+
+Шаг 1: Создаем файл сервиса
+
+```bash
+sudo nano /etc/systemd/system/cloudpub.service
+```
+
+Пример содержимого (подставьте свой путь к clo):
+
+```bash
+[Unit]
+Description=CloudPub Client
+After=network.target
+ConditionPathExists=/root/.config/cloudpub/client.toml
+
+[Service]
+Type=simple
+ExecStartPre=/usr/local/bin/clo ls
+ExecStart=/usr/local/bin/clo run # полный путь к программе
+Restart=always
+RestartSec=30
+# Перезапуск каждые 24 часа
+RuntimeMaxSec=86400
+
+# Настройки песочницы
+ProtectSystem=full
+PrivateTmp=yes
+PrivateDevices=yes
+NoNewPrivileges=yes
+#CapabilityBoundingSet=
+RestrictAddressFamilies=AF_INET AF_INET6
+RestrictNamespaces=yes
+RestrictRealtime=yes
+MemoryDenyWriteExecute=yes
+LockPersonality=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Шаг 2: Перезагружаем systemd и запускаем
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start cloudpub
+sudo systemctl enable cloudpub  # автозапуск при загрузке
+```
+
+Обновление
+
+```bash
+# Остановите сервис перед обновлением
+sudo systemctl stop cloudpub
+
+clo upgrade
+
+# Затем запустите:
+sudo systemctl start cloudpub
+```
+
+Дополнительная ссылка на статью [https://yaml.mansmarthome.info/roland/70aac338aab44286ab81c7ea019dc0ca/](https://yaml.mansmarthome.info/roland/70aac338aab44286ab81c7ea019dc0ca/)

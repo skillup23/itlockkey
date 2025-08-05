@@ -6,6 +6,7 @@ export const PUBLIC_ROUTES = [
   '/login',
   // '/register',
   '/products',
+  '/blog',
   // '/api/register',
   // '/api/auth/callback/google',
   // '/api/auth/callback/github',
