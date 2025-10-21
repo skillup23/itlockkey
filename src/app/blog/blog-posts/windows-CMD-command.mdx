@@ -55,3 +55,22 @@ SFC scannow — команда в Windows 10, которая позволяет 
 ```bash
  DISM /Online /Cleanup-Image /RestoreHealth
 ```
+
+### Отключения срока действия пароля
+
+```bash
+net accounts /maxpwage:unlimited
+```
+
+### Произошла внутренняя ошибка при RDP подключении 0x904
+
+1 Способ:
+Очистить в ветке HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Servers (если нет ветки, то поиском по реестру по ip сервера) и сбросить кэш RDP в каталоге C:\Users\%Username%\AppData\Local\Microsoft\Terminal Server Client\Cache (перед удалением закройте все запущенные сеансы mstsc.exe):
+
+2 Способ:
+Временным решением этой проблемы является увеличение максимального количества незавершенных подключений.\
+По умолчанию для клиентских SKU оно равно 100, а для серверных SKU - 3000.\
+Это значение определяется следующим разделом реестра DWORD:\
+Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\
+DWORD: MaxOutstandingConnections\
+VALUE: 10000
