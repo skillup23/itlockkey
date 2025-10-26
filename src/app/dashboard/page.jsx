@@ -1,18 +1,18 @@
-import { auth } from '@/auth';
-import Logout from '@/components/Logout';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { auth } from "@/auth";
+import Logout from "@/components/Logout";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const DashboardPage = async () => {
   const session = await auth();
-  if (!session?.user) redirect('/login');
-  if (session?.user.role !== 'admin') redirect('/home');
+  if (!session?.user) redirect("/login");
+  if (session?.user.role !== "admin") redirect("/home");
 
-  if (session?.user.role === 'admin') {
+  if (session?.user.role === "admin") {
     return (
       <div className="flex flex-col items-center gap-4">
         <p>
-          Вы авторизованы как администратор, добро пожаловать!{' '}
+          Вы авторизованы как администратор, добро пожаловать!{" "}
           <span>{session?.user.name}</span>
         </p>
 
@@ -23,7 +23,7 @@ const DashboardPage = async () => {
           Добавить нового пользователя
         </Link>
         <Link
-          href="/users-edit"
+          href="/dashboard/users-edit"
           className="my-4 p-4 bg-green-500 rounded-sm outset bg-green"
         >
           Редактировать пользователей
