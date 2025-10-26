@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({
+    email: "",
+    name: "",
+    password: "",
+  });
 
   // Загрузка списка пользователей
   useEffect(() => {
@@ -44,42 +48,52 @@ export default function UsersPage() {
           )
         );
         setEditingUser(null);
-        setFormData({ email: "", password: "" });
-        alert("User updated successfully");
+        setFormData({ email: "", name: "", password: "" });
+        alert("Пользователь успешно изменен");
       } else {
         alert(result.message);
       }
     } catch (error) {
-      console.error("Error updating user:", error);
+      console.error("Ошибка при изменении пользователя:", error);
     }
   };
 
   const startEdit = (user) => {
     setEditingUser(user);
-    setFormData({ email: user.email, password: "" });
+    setFormData({ email: user.email, name: user.name, password: "" });
   };
 
   return (
-    <div>
-      <h1>User Management</h1>
+    <div className="p-4">
+      <h2 className="text-xl font-medium text-center">
+        Редактирование пользователей
+      </h2>
 
-      <div>
-        <h2>Users List</h2>
-        <ul>
+      <div className="mt-4">
+        <h3 className="text-lg">Список пользователей:</h3>
+        <ul className="mt-2">
           {users.map((user) => (
-            <li key={user._id}>
+            <li
+              key={user._id}
+              className="mt-2 p-2 flex items-center gap-4 bg-amber-100 rounded"
+            >
               {user.name} ({user.email})
-              <button onClick={() => startEdit(user)}>Edit</button>
+              <button
+                onClick={() => startEdit(user)}
+                className="bg-amber-200 hover:bg-amber-300"
+              >
+                Выбрать
+              </button>
             </li>
           ))}
         </ul>
       </div>
 
       {editingUser && (
-        <div>
-          <h2>Edit User</h2>
+        <div className="mt-6 p-2 bg-gray-100 rounded">
+          <h2>Изменить данные пользователя</h2>
           <form onSubmit={handleUpdate}>
-            <div>
+            <div className="mt-2 flex gap-2 items-center">
               <label>Email:</label>
               <input
                 type="text"
@@ -88,22 +102,47 @@ export default function UsersPage() {
                   setFormData({ ...formData, email: e.target.value })
                 }
                 required
+                className="p-1 bg-white rounded"
               />
             </div>
-            <div>
-              <label>New Password (leave blank to keep current):</label>
+            <div className="mt-2 flex gap-2 items-center">
+              <label>Имя пользователя:</label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                required
+                className="p-1 bg-white rounded"
+              />
+            </div>
+            <div className="mt-2 flex gap-2 items-center">
+              <label>
+                Новый пароль (оставьте поле пустым, чтобы оставить старый без
+                изменений):
+              </label>
               <input
                 type="password"
                 value={formData.password}
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
                 }
+                className="p-1 bg-white rounded"
               />
             </div>
-            <button type="submit">Update User</button>
-            <button type="button" onClick={() => setEditingUser(null)}>
-              Cancel
-            </button>
+            <div className="mt-2 flex gap-4">
+              <button type="submit" className="bg-green-200 hover:bg-green-400">
+                Сохранить изменения
+              </button>
+              <button
+                type="button"
+                onClick={() => setEditingUser(null)}
+                className="bg-red-200 hover:bg-red-300"
+              >
+                Отмена
+              </button>
+            </div>
           </form>
         </div>
       )}
